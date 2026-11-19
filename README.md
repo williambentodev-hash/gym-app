@@ -38,3 +38,4 @@ docs/
 | [0003](docs/adr/0003-aws-como-provedor-de-nuvem.md) | AWS como nuvem | Substituído por 0005 |
 | [0004](docs/adr/0004-typescript-como-linguagem-do-backend.md) | TypeScript no backend | Aceito |
 | [0005](docs/adr/0005-cloudflare-como-plataforma-de-nuvem.md) | Cloudflare como plataforma | Aceito |
+| [0006](docs/adr/0006-estrategia-de-sincronizacao-offline.md) | Sincronização local-first com log de eventos por usuário | Aceito |
