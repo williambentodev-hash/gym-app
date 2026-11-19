@@ -44,6 +44,18 @@ export function prescricaoCompativel(modalidade: Modalidade, p: Prescricao): boo
   return true;
 }
 
+/**
+ * Resultado de um comando (lado da escrita): ou os eventos a gravar, ou o motivo da recusa.
+ * Comandos são funções puras (estado, entrada) → Decisao. IDs vêm de fora (o domínio não gera aleatoriedade).
+ * `eventId` opcional: para eventos com ID determinístico (ADR-0006, regra 8).
+ */
+export type Decisao<E extends { type: string; payload: unknown }> =
+  | { ok: true; eventos: Array<E & { eventId?: string }> }
+  | { ok: false; erro: string };
+
+export const aceitar = <E extends { type: string; payload: unknown }>(...eventos: Array<E & { eventId?: string }>): Decisao<E> => ({ ok: true, eventos });
+export const recusar = <E extends { type: string; payload: unknown }>(erro: string): Decisao<E> => ({ ok: false, erro });
+
 /** Metadados do envelope que os reducers podem usar (nunca para ordenar: ADR-0006, regra 3). */
 export type Meta = { ocorridoEm: string };
 

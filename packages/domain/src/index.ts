@@ -8,6 +8,8 @@ export * from './comum/index';
 export * from './catalogo/index';
 export * from './planejamento/index';
 export * from './execucao/index';
+export * from './progresso/index';
+export * from './orientacao/index';
 export { criarEvento, interpretarEvento, ESQUEMAS_V1, type EventoDominio, type TipoEvento, type EnvelopeMinimo } from './eventos';
 
 /** Estado de todos os contextos, derivado do log de eventos do usuário. */
