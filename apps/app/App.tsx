@@ -15,7 +15,8 @@ function gerarEventos(qtd: number): EventoArmazenado[] {
       exercicioId: EXERCICIOS[i % EXERCICIOS.length]!,
       reps: 6 + (i % 7),
       cargaKg: 20 + (i % 40) * 2.5,
-      tipo: i % 5 === 0 ? 'aquecimento' : 'trabalho',
+      // i % 7 (e não i % 5): com 10 exercícios, i % 5 marcava TODA série de supino como aquecimento.
+      tipo: i % 7 === 0 ? 'aquecimento' : 'trabalho',
     };
     return { eventId: Crypto.randomUUID(), type: evento.type, payload: JSON.stringify(evento), pendente: true };
   });
