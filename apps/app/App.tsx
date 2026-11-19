@@ -1,193 +1,127 @@
-// ⚠️ Tela de spike (Fase 3): valida S1 (SQLite local, inclusive web) e S4 (rebuild de 1.000 eventos < 1 s).
-import * as Crypto from 'expo-crypto';
+// Walking skeleton (Fase 3): registrar série → SQLite local → sync com o UserStore → outros aparelhos.
+// A interface lê sempre o estado local (ADR-0007, ponto 3); a rede nunca bloqueia o registro (QA-1).
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
-import { Button, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { estadoInicial, reduzir, type EstadoProgresso, type SerieRegistrada } from '@gym/domain';
-import { abrirLocalDb, type EventoArmazenado, type LocalDb } from './src/infra/local-db';
-import { authClient, fetchAutenticado, API_URL } from './src/infra/auth-client';
 import { Image } from 'expo-image';
-import { garantirMidia, limparMidias, type MidiaLocal } from './src/infra/midias-offline';
+import { useCallback, useEffect, useState } from 'react';
+import { Button, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
+import type { EstadoProgresso } from '@gym/domain';
+import { iniciarApp, registrarSerie, type App as AppCtx } from './src/aplicacao/motor';
+import { API_URL, authClient } from './src/infra/auth-client';
+import { garantirMidia, type MidiaLocal } from './src/infra/midias-offline';
 
-// Spike S6: animação do exercício disponível offline.
-const URL_ANIMACAO = `${API_URL}/media/exercicios/agachamento-livre.v1.gif`;
-
-function PainelMidia() {
-  const [midia, setMidia] = useState<MidiaLocal | null>(null);
-  const [status, setStatus] = useState('');
-
-  async function carregar() {
-    try {
-      setStatus('carregando…');
-      const m = await garantirMidia(URL_ANIMACAO);
-      setMidia(m);
-      setStatus(`origem: ${m.origem}`);
-    } catch (e) {
-      setMidia(null);
-      setStatus(`falhou (sem rede e sem arquivo local?): ${String(e)}`);
-    }
-  }
-
-  useEffect(() => {
-    carregar();
-  }, []);
-
-  return (
-    <View style={styles.painel}>
-      <Text style={styles.sub}>S6 — Agachamento livre · {status}</Text>
-      <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
-        {midia ? (
-          <Image source={{ uri: midia.uri }} style={{ width: 120, height: 120 }} cachePolicy="none" contentFit="contain" />
-        ) : (
-          <View style={{ width: 120, height: 120, backgroundColor: '#eee' }} />
-        )}
-        <View style={{ gap: 8 }}>
-          <Button title="Recarregar" onPress={carregar} />
-          <Button title="Apagar mídia" color="#b00" onPress={() => { limparMidias(); setMidia(null); setStatus('apagada'); }} />
-        </View>
-      </View>
-    </View>
-  );
-}
-
-// Spike S3: login Google + chamada a uma rota protegida.
-function PainelLogin() {
-  const { data: sessao, isPending } = authClient.useSession();
-  const [resposta, setResposta] = useState('');
-
-  async function testarApi() {
-    try {
-      const r = await fetchAutenticado('/api/me');
-      setResposta(`[${r.status}] ${await r.text()}`);
-    } catch (e) {
-      setResposta(`erro: ${String(e)}`);
-    }
-  }
-
-  return (
-    <View style={styles.painel}>
-      <Text style={styles.sub}>
-        S3 — {isPending ? 'verificando sessão…' : sessao ? `logado: ${sessao.user.name} (${sessao.user.email})` : 'não logado'}
-      </Text>
-      <View style={styles.botoes}>
-        {sessao ? (
-          <Button title="Sair" onPress={() => authClient.signOut()} color="#555" />
-        ) : (
-          <Button title="Entrar com Google" onPress={() => authClient.signIn.social({ provider: 'google', callbackURL: '/' })} />
-        )}
-        <Button title="Testar /api/me" onPress={testarApi} />
-      </View>
-      {resposta ? <Text style={styles.linha}>{resposta}</Text> : null}
-    </View>
-  );
-}
-
-const EXERCICIOS = ['supino', 'agachamento', 'remada', 'desenvolvimento', 'terra', 'rosca', 'triceps', 'leg-press', 'barra', 'panturrilha'];
-
-function gerarEventos(qtd: number): EventoArmazenado[] {
-  return Array.from({ length: qtd }, (_, i) => {
-    const evento: SerieRegistrada = {
-      type: 'SerieRegistrada',
-      exercicioId: EXERCICIOS[i % EXERCICIOS.length]!,
-      reps: 6 + (i % 7),
-      cargaKg: 20 + (i % 40) * 2.5,
-      // i % 7 (e não i % 5): com 10 exercícios, i % 5 marcava TODA série de supino como aquecimento.
-      tipo: i % 7 === 0 ? 'aquecimento' : 'trabalho',
-    };
-    return { eventId: Crypto.randomUUID(), type: evento.type, payload: JSON.stringify(evento), pendente: true };
-  });
-}
+const EXERCICIOS = ['supino', 'agachamento', 'remada'] as const;
 
 export default function App() {
-  const [db, setDb] = useState<LocalDb | null>(null);
-  const [total, setTotal] = useState(0);
-  const [log, setLog] = useState<string[]>([]);
-  const [estado, setEstado] = useState<EstadoProgresso>(estadoInicial);
+  const [app, setApp] = useState<AppCtx | null>(null);
+  const [estado, setEstado] = useState<EstadoProgresso>({});
+  const [contagens, setContagens] = useState({ pendentes: 0, confirmados: 0 });
+  const [statusSync, setStatusSync] = useState('—');
+  const { data: sessao, isPending } = authClient.useSession();
 
-  const registrar = (linha: string) => setLog((l) => [`${new Date().toLocaleTimeString()}  ${linha}`, ...l]);
-
-  useEffect(() => {
-    abrirLocalDb()
-      .then(async (d) => {
-        setDb(d);
-        const n = await d.contar();
-        setTotal(n);
-        registrar(`Banco aberto (${Platform.OS}). Eventos persistidos: ${n}`);
-        // Modo automático para teste headless na web: ?auto
-        if (Platform.OS === 'web' && globalThis.location?.search.includes('auto')) {
-          await gravar1000(d);
-          const resumo = await reconstruir(d);
-          document.title = `SPIKE_RESULT antes=${n} ${resumo}`;
-        }
-      })
-      .catch((e) => {
-        registrar(`ERRO ao abrir o banco: ${String(e)}`);
-        if (Platform.OS === 'web') document.title = `SPIKE_RESULT ERRO ${String(e)}`;
-      });
+  const atualizarTela = useCallback(async (a: AppCtx) => {
+    setEstado(await a.motor.estado());
+    setContagens(await a.store.contagens());
   }, []);
 
-  async function gravar1000(d: LocalDb | null = db) {
-    if (!d) return;
-    const db = d;
-    const t0 = performance.now();
-    await db.anexar(gerarEventos(1000));
-    const ms = performance.now() - t0;
-    const n = await db.contar();
-    setTotal(n);
-    registrar(`Gravou 1.000 eventos em ${ms.toFixed(0)} ms. Total: ${n}`);
-  }
+  const sincronizar = useCallback(
+    async (a: AppCtx) => {
+      setStatusSync('sincronizando…');
+      try {
+        const r = await a.motor.sincronizar();
+        setStatusSync(`ok · enviados ${r.enviados} · recebidos ${r.recebidos} · cursor ${r.cursor} · ${new Date().toLocaleTimeString()}`);
+      } catch (e) {
+        setStatusSync(`não sincronizou (${e instanceof Error ? e.message : String(e)}) · dados seguros no aparelho`);
+      }
+      await atualizarTela(a);
+    },
+    [atualizarTela],
+  );
 
-  async function reconstruir(d: LocalDb | null = db): Promise<string> {
-    if (!d) return '';
-    const db = d;
-    const t0 = performance.now();
-    const eventos = await db.lerTodos();
-    const t1 = performance.now();
-    const novo = eventos.reduce((s, e) => reduzir(s, JSON.parse(e.payload) as SerieRegistrada), estadoInicial);
-    const t2 = performance.now();
-    setEstado(novo);
-    const totalMs = t2 - t0;
-    const resumo = `depois=${eventos.length} rebuild_ms=${totalMs.toFixed(0)} leitura_ms=${(t1 - t0).toFixed(0)} reducao_ms=${(t2 - t1).toFixed(0)}`;
-    registrar(`Rebuild: ${resumo} ${totalMs < 1000 ? '✅' : '❌'}`);
-    return resumo;
-  }
+  useEffect(() => {
+    iniciarApp().then(async (a) => {
+      setApp(a);
+      await atualizarTela(a);
+    });
+  }, [atualizarTela]);
 
-  async function limpar() {
-    if (!db) return;
-    await db.limpar();
-    setTotal(0);
-    setEstado(estadoInicial);
-    registrar('Banco limpo');
+  // Sincroniza ao abrir e sempre que a sessão ficar disponível.
+  useEffect(() => {
+    if (app && sessao) sincronizar(app);
+  }, [app, sessao, sincronizar]);
+
+  async function registrar() {
+    if (!app) return;
+    const exercicioId = EXERCICIOS[Math.floor(Math.random() * EXERCICIOS.length)]!;
+    await registrarSerie(app, { exercicioId, reps: 8 + Math.floor(Math.random() * 5), cargaKg: 40 + 2.5 * Math.floor(Math.random() * 16), tipo: 'trabalho' });
+    await atualizarTela(app); // aparece na hora, com ou sem rede
+    if (sessao) sincronizar(app); // tenta sincronizar em segundo plano
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Spike — {Platform.OS}</Text>
-      <PainelLogin />
-      <PainelMidia />
-      <Text>Eventos no SQLite local: {total}</Text>
-      <View style={styles.botoes}>
-        <Button title="Gravar 1.000" onPress={() => gravar1000()} disabled={!db} />
-        <Button title="Reconstruir" onPress={() => reconstruir()} disabled={!db} />
-        <Button title="Limpar" onPress={limpar} disabled={!db} color="#b00" />
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.titulo}>gym.app — walking skeleton ({Platform.OS})</Text>
+
+      <View style={styles.painel}>
+        <Text style={styles.sub}>
+          {isPending ? 'verificando sessão…' : sessao ? `👤 ${sessao.user.name}` : '👤 não logado (os registros ficam no aparelho)'}
+        </Text>
+        <View style={styles.botoes}>
+          {sessao ? (
+            <Button title="Sair" color="#555" onPress={() => authClient.signOut()} />
+          ) : (
+            <Button title="Entrar com Google" onPress={() => authClient.signIn.social({ provider: 'google', callbackURL: '/' })} />
+          )}
+        </View>
       </View>
-      <Text style={styles.sub}>Estado (supino): {JSON.stringify(estado['supino'] ?? {})}</Text>
-      <ScrollView style={styles.log}>
-        {log.map((l, i) => (
-          <Text key={i} style={styles.linha}>{l}</Text>
+
+      <View style={styles.painel}>
+        <View style={styles.botoes}>
+          <Button title="Registrar série" onPress={registrar} disabled={!app} />
+          <Button title="Sincronizar" onPress={() => app && sincronizar(app)} disabled={!app || !sessao} />
+        </View>
+        <Text>
+          Eventos: {contagens.confirmados} confirmados · <Text style={contagens.pendentes ? styles.pendente : undefined}>{contagens.pendentes} pendentes</Text>
+        </Text>
+        <Text style={styles.sub}>Sync: {statusSync}</Text>
+        {app ? <Text style={styles.sub}>Aparelho: {app.store.deviceId.slice(0, 8)}</Text> : null}
+      </View>
+
+      <View style={styles.painel}>
+        <Text style={styles.secao}>Progresso (projeção local dos eventos)</Text>
+        {Object.keys(estado).length === 0 ? <Text style={styles.sub}>nenhuma série ainda</Text> : null}
+        {Object.entries(estado).map(([ex, p]) => (
+          <Text key={ex}>
+            {ex}: {p.series} séries · {p.tonelagem} kg de tonelagem · recorde {p.recordeKg} kg
+          </Text>
         ))}
-      </ScrollView>
+      </View>
+
+      <PainelMidia />
       <StatusBar style="auto" />
+    </ScrollView>
+  );
+}
+
+// Mantido do spike S6: animação disponível offline (ADR-0010).
+function PainelMidia() {
+  const [midia, setMidia] = useState<MidiaLocal | null>(null);
+  useEffect(() => {
+    garantirMidia(`${API_URL}/media/exercicios/agachamento-livre.v1.gif`).then(setMidia).catch(() => setMidia(null));
+  }, []);
+  return (
+    <View style={[styles.painel, { flexDirection: 'row', alignItems: 'center', gap: 12 }]}>
+      {midia ? <Image source={{ uri: midia.uri }} style={{ width: 80, height: 80 }} cachePolicy="none" contentFit="contain" /> : null}
+      <Text style={styles.sub}>Agachamento livre · {midia ? midia.origem : 'indisponível'}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff', padding: 24, paddingTop: 64, gap: 12 },
+  container: { padding: 24, paddingTop: 64, gap: 12, backgroundColor: '#fff' },
   titulo: { fontSize: 20, fontWeight: '600' },
-  botoes: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
+  secao: { fontWeight: '600' },
   sub: { color: '#555' },
+  pendente: { color: '#b45309', fontWeight: '600' },
   painel: { gap: 8, paddingBottom: 12, borderBottomWidth: 1, borderColor: '#ddd' },
-  log: { flex: 1, borderTopWidth: 1, borderColor: '#ddd', paddingTop: 8 },
-  linha: { fontFamily: Platform.select({ web: 'monospace', default: undefined }), fontSize: 12, marginBottom: 4 },
+  botoes: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
 });

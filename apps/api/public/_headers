@@ -1,5 +1,10 @@
-# Mídias versionadas no nome do arquivo (ex.: agachamento-livre.v1.gif): conteúdo imutável.
-# Nova versão da animação = novo nome de arquivo, então o cache pode ser eterno.
+# Isolamento cross-origin para todo o site: o SQLite da web (WASM) usa SharedArrayBuffer (spike S1).
+# COEP "credentialless" ainda permite carregar imagens de outras origens sem credenciais (ex.: GIFs do catálogo).
+/*
+  Cross-Origin-Embedder-Policy: credentialless
+  Cross-Origin-Opener-Policy: same-origin
+
+# Mídias versionadas no nome do arquivo (ex.: agachamento-livre.v1.gif): conteúdo imutável (ADR-0010).
 /media/*
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *

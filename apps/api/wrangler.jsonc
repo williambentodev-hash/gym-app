@@ -8,9 +8,12 @@
   // ADR-0010: mídias do catálogo (e futuramente a web) como arquivos estáticos.
   // Requisições a assets existentes são servidas direto pela CDN, sem executar o Worker
   // (não consomem a cota de requisições do Worker).
+  // static/ é gerada (build web do Expo + public/): ver scripts/montar-assets.mjs e `pnpm deploy` na raiz.
   "assets": {
-    "directory": "./public",
-    "binding": "ASSETS"
+    "directory": "./static",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
   },
   "vars": {
     "BETTER_AUTH_URL": "https://gym-api.gym-api.workers.dev"

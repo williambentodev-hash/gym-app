@@ -12,7 +12,8 @@
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint",
     "lint:arch": "depcruise apps packages --config .dependency-cruiser.cjs",
-    "docs:arch": "depcruise apps/app/App.tsx apps/api/src packages --config .dependency-cruiser.cjs --output-type mermaid --output-to docs/architecture/dependencias.mmd"
+    "docs:arch": "depcruise apps/app/App.tsx apps/api/src packages --config .dependency-cruiser.cjs --output-type mermaid --output-to docs/architecture/dependencias.mmd",
+    "deploy": "pnpm --filter @gym/app export:web && pnpm --filter @gym/api deploy"
   },
   "devDependencies": {
     "dependency-cruiser": "^18.8.0",

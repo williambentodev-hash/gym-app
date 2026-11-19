@@ -1,10 +1,16 @@
-// ⚠️ Código de spike (Fase 3). Cliente de autenticação (ADR-0008).
+// Cliente de autenticação (ADR-0008).
 import { createAuthClient } from 'better-auth/react';
 import { expoClient } from '@better-auth/expo/client';
 import * as SecureStore from 'expo-secure-store';
 import { Platform } from 'react-native';
 
-export const API_URL = 'https://gym-api.gym-api.workers.dev';
+const API_PRODUCAO = 'https://gym-api.gym-api.workers.dev';
+
+// Web servida pelo Worker: mesma origem (sem CORS, cookie do navegador). Em dev local (localhost), aponta para produção.
+export const API_URL =
+  Platform.OS === 'web' && typeof location !== 'undefined' && location.hostname !== 'localhost'
+    ? location.origin
+    : API_PRODUCAO;
 
 // Nativo: sessão guardada no SecureStore e enviada como header Cookie manualmente.
 // Web: a web será servida pelo próprio Worker (mesma origem), então o cookie do navegador basta.

@@ -4,7 +4,9 @@
   "main": "index.ts",
   "dependencies": {
     "@better-auth/expo": "^1.7.25",
+    "@gym/contracts": "workspace:*",
     "@gym/domain": "workspace:*",
+    "@gym/sync": "workspace:*",
     "better-auth": "^1.7.25",
     "expo": "~58.0.26",
     "expo-constants": "~58.0.16",
@@ -31,7 +33,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "export:web": "expo export --platform web --output-dir ../api/static"
   },
   "private": true
 }

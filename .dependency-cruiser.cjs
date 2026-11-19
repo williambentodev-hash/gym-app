@@ -63,7 +63,7 @@ module.exports = {
   ],
   options: {
     doNotFollow: { path: 'node_modules' },
-    exclude: { path: ['node_modules', '\\.expo/', 'dist/', 'worker-configuration\\.d\\.ts$'] },
+    exclude: { path: ['node_modules', '\\.expo/', 'dist/', '^apps/api/static/', 'worker-configuration\\.d\\.ts$'] },
     tsPreCompilationDeps: true,
     enhancedResolveOptions: {
       exportsFields: ['exports'],
