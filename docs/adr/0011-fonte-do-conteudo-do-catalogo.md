@@ -15,7 +15,7 @@ Avaliação do repositório (2026-11-18):
 - O README declara que os GIFs foram **"extraídos de Internet"**, que **"pertencem a seus respectivos autores"**, e que o mantenedor não detém nem pode conceder direitos.
 - Último commit em jul/2026, justamente a adição desse aviso de isenção.
 
-**Decisão de produto (dono do produto):** o app será, por ora, de **uso pessoal**, sem comercialização.
+**Decisão de produto (dono do produto):** o app será, por ora, de **uso pessoal e de um círculo familiar** (até 20 pessoas, o cenário de escala da Fase 0), **sem comercialização**.
 
 ## Opções consideradas
 
@@ -41,5 +41,9 @@ Usar o **ExerciseGymGifsDB** com três salvaguardas:
 - ✅ Catálogo rico desde o início, com animações e nomes em português.
 - ✅ Nada de terceiros no nosso repositório ou na nossa CDN: o repositório pode ficar público no GitHub sem expor esse conteúdo.
 - ⚠️ **Dependência de disponibilidade externa:** se o repositório de origem sair do ar ou mudar caminhos, mídias **ainda não baixadas** ficam indisponíveis (as já baixadas continuam no aparelho). Aceitável para uso pessoal.
-- ⚠️ **Risco jurídico residual aceito pelo dono do produto**, restrito ao uso pessoal.
-- 🔁 **Gatilhos de revisão obrigatória:** distribuir o app a outras pessoas além do dono; qualquer forma de comercialização; publicação em loja; o repositório de origem receber uma licença (reavaliar) ou ser removido. Em qualquer desses casos, **substituir a fonte** antes de seguir.
+- ⚠️ **Risco jurídico residual aceito pelo dono do produto.** Mesmo no círculo familiar, entregar o app a outras pessoas é tecnicamente distribuição de conteúdo de terceiros. O risco prático é baixo (sem fins comerciais, grupo fechado), mas não é zero.
+- 🔁 **Gatilhos de revisão obrigatória:** uso **fora do círculo familiar** ou acima de 20 pessoas; qualquer forma de comercialização (assinatura, anúncios, venda); publicação em loja; o repositório de origem receber uma licença (reavaliar) ou ser removido. Em qualquer desses casos, **substituir a fonte** antes de seguir.
+
+## Histórico
+
+- 2026-11-18: escopo ajustado de "só o dono" para "dono + círculo familiar, até 20 pessoas", a pedido do dono do produto, mantendo o cenário de escala da Fase 0.
