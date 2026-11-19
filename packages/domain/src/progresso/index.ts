@@ -89,19 +89,68 @@ export function semanaIso(dataIso: string): string {
   return `${dia.getUTCFullYear()}-W${String(semana).padStart(2, '0')}`;
 }
 
+/** Peso de uma série para um grupo muscular: contagem fracionada (principal = 1, secundário = 0,5). */
+export type PesoGrupo = { grupo: string; peso: number };
+export const PESO_PRINCIPAL = 1;
+export const PESO_SECUNDARIO = 0.5;
+
 /**
  * Volume semanal = séries EFETIVAS por grupo muscular (01-dominio §1): trabalho ou drop, perto da falha
- * (RIR ≤ 3, ou RIR não informado), excluindo cardio. `gruposDe` vem do catálogo (injetado: Progresso não o conhece).
+ * (RIR ≤ 3, ou RIR não informado), excluindo cardio. Contagem FRACIONADA: o grupo principal recebe 1 série e
+ * cada secundário 0,5 (prática comum na literatura de volume). `gruposDe` vem do catálogo (injetado).
  */
-export function volumeSemanal(e: EstadoExecucao, gruposDe: (exercicioId: string) => readonly string[], semana: string): Record<string, number> {
+export function volumeSemanal(e: EstadoExecucao, gruposDe: (exercicioId: string) => readonly PesoGrupo[], semana: string): Record<string, number> {
   const out: Record<string, number> = {};
   for (const s of sessoesValidas(e))
     for (const serie of s.series) {
       if (!contaParaVolume(serie.tipo) || serie.medidas.modalidade === 'cardio' || semanaIso(serie.registradaEm) !== semana) continue;
       const rir = 'rir' in serie.medidas ? serie.medidas.rir : undefined;
       if (rir !== undefined && rir > 3) continue;
-      for (const g of gruposDe(serie.exercicioId)) out[g] = (out[g] ?? 0) + 1;
+      for (const { grupo, peso } of gruposDe(serie.exercicioId)) out[grupo] = (out[grupo] ?? 0) + peso;
     }
+  return out;
+}
+
+export type PontoHistorico = {
+  sessaoId: string;
+  data: string;
+  /** Melhor série de TRABALHO da sessão para o exercício (base do gráfico de evolução). */
+  melhor: Medidas;
+  /** carga_repeticoes: maior 1RM estimado da sessão; demais modalidades: indefinido. */
+  e1rmKg?: number;
+  series: number;
+  tonelagemKg: number;
+};
+
+/** Valor comparável de uma série, conforme a modalidade (maior = melhor). */
+export function valorDaSerie(m: Medidas): number {
+  switch (m.modalidade) {
+    case 'carga_repeticoes': return e1rm(m.cargaKg, m.reps) ?? m.cargaKg;
+    case 'peso_corporal': return m.reps + (m.cargaAdicionalKg ?? 0) / 2.5; // 2,5 kg extra ≈ 1 repetição
+    case 'tempo': return m.duracaoSeg;
+    case 'cardio': return m.distanciaM ?? m.duracaoSeg;
+  }
+}
+
+/** Evolução de um exercício: uma linha por sessão ENCERRADA, em ordem cronológica. */
+export function historicoDoExercicio(e: EstadoExecucao, exercicioId: string): PontoHistorico[] {
+  const out: PontoHistorico[] = [];
+  for (const s of sessoesValidas(e)) {
+    if (!encerrada(s)) continue;
+    const doEx = s.series.filter((x) => x.exercicioId === exercicioId && x.tipo !== 'aquecimento');
+    const trabalho = doEx.filter((x) => x.tipo === 'trabalho');
+    if (trabalho.length === 0) continue;
+    const melhor = trabalho.reduce((a, b) => (valorDaSerie(b.medidas) > valorDaSerie(a.medidas) ? b : a)).medidas;
+    const e1rms = trabalho.flatMap((x) => (x.medidas.modalidade === 'carga_repeticoes' ? [e1rm(x.medidas.cargaKg, x.medidas.reps)] : [])).filter((v): v is number => v !== undefined);
+    out.push({
+      sessaoId: s.sessaoId,
+      data: s.encerradaEm ?? s.iniciadaEm,
+      melhor,
+      ...(e1rms.length ? { e1rmKg: Math.max(...e1rms) } : {}),
+      series: doEx.length,
+      tonelagemKg: doEx.reduce((t, x) => t + (x.medidas.modalidade === 'carga_repeticoes' ? x.medidas.cargaKg * x.medidas.reps : 0), 0),
+    });
+  }
   return out;
 }
 

@@ -38,6 +38,21 @@ jobs:
       - name: Testes
         run: pnpm test
 
+      # E2E do fluxo principal na build web real (Chrome do runner, sem sandbox de usuário).
+      - name: E2E web
+        env:
+          NAVEGADOR: /usr/bin/google-chrome
+          CI: '1'
+        run: pnpm e2e:web
+
+      - name: Screenshots do E2E (em caso de falha)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-screenshots
+          path: .e2e/
+          retention-days: 7
+
       # ADR-0014: reprova só vulnerabilidades altas/críticas em dependências de produção.
       # (Moderadas em ferramentas de build são avaliadas manualmente; ver docs/architecture/06-seguranca-lgpd.md.)
       - name: Auditoria de dependências

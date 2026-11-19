@@ -27,6 +27,8 @@ export default function Raiz() {
             <Stack.Screen name="prescricao" options={{ presentation: 'modal', title: 'Prescrição' }} />
             <Stack.Screen name="execucao/[sessaoId]" options={{ headerShown: false, gestureEnabled: false }} />
             <Stack.Screen name="privacidade" options={{ title: '' }} />
+            <Stack.Screen name="sessao/[sessaoId]" options={{ title: '' }} />
+            <Stack.Screen name="exercicio" options={{ title: '' }} />
           </Stack>
         </View>
       </AppProvider>

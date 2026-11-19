@@ -54,9 +54,21 @@ Tela → comando do domínio (puro, valida invariantes) → Decisao
 
 Lição de arquitetura: **o spike prova a viabilidade; o E2E prova o produto**. Os três problemas só apareceram com o fluxo real de um usuário.
 
+## Lapidação do MVP (2026-11-19)
+
+| Item | Entrega |
+|---|---|
+| E2E na CI | O job `verificar` roda `pnpm e2e:web` com o Chrome do runner; screenshots viram artefato em caso de falha |
+| Detalhe do treino | `/sessao/[sessaoId]`: duração, séries, kg movidos, cada exercício com suas séries (T/D/A) |
+| Evolução por exercício | `/exercicio?id=…`: gráfico do 1RM estimado (ou melhor marca) por treino + tabela; spec da skill de dataviz (série única, barras finas, rótulo só no recorde/selecionado, toque = tooltip) |
+| Volume com secundários | Contagem fracionada: principal = 1, secundário = 0,5 (`volumeSemanal` recebe pesos) |
+
+**Aprendizados:**
+- **IDs com "/" em rotas:** os IDs do catálogo (`pectorals/barbell-bench-press`) vão como **query** (`?id=`), não como segmento de rota dinâmica (que casa um único trecho do caminho).
+- **E2E e abas:** telas de abas inativas continuam no DOM e não ficam `display: none`, só cobertas pela aba atual. O teste passou a exigir que o elemento esteja **no topo** (`elementFromPoint`), não só "visível" para o CSS.
+- **Gráfico com 1 ponto:** base não-zero só com 2+ pontos (senão, "base" sem sentido).
+
 ## Pendências conhecidas
 
-- E2E ainda não roda na CI (precisa de um navegador no runner).
-- Volume semanal conta só o **grupo principal** do exercício (secundários ficam para depois).
-- Histórico sem tela de detalhe da sessão; sem gráfico de evolução por exercício.
-- Multi-aba na web: a segunda aba mostra a mensagem de banco em uso (não há coordenação entre abas).
+- Multi-aba na web: a segunda aba mostra a mensagem de banco em uso (sem coordenação entre abas).
+- Gráfico de evolução mostra os últimos 16 treinos (sem filtro de período).

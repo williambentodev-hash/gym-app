@@ -6,7 +6,8 @@ import puppeteer from 'puppeteer-core';
 const url = process.argv[2];
 // Navegador local (Chromium/Edge/Chrome). Defina NAVEGADOR para outro caminho.
 const edge = process.env.NAVEGADOR ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
-const browser = await puppeteer.launch({ executablePath: edge, headless: true, defaultViewport: { width: 420, height: 900 } });
+// Na CI (Linux) o Chrome roda sem sandbox de usuário.
+const browser = await puppeteer.launch({ executablePath: edge, headless: true, defaultViewport: { width: 420, height: 900 }, args: process.env.CI ? ['--no-sandbox'] : [] });
 const page = await browser.newPage();
 const erros = [];
 page.on('pageerror', (e) => erros.push(String(e)));
@@ -23,14 +24,37 @@ const passo = async (nome, fn) => {
     await browser.close(); process.exit(1);
   }
 };
+// As abas mantêm telas montadas por trás da atual: o mesmo texto pode existir numa tela invisível.
+// Por isso os ajudantes procuram, entre TODAS as ocorrências, a primeira realmente visível (checkVisibility).
+const visivel = async (texto, timeout = 15000) => {
+  const limite = Date.now() + timeout;
+  while (Date.now() < limite) {
+    for (const el of await page.$$(`::-p-text(${texto})`)) {
+      // Visível E no topo: telas de abas inativas podem estar "visíveis" para o CSS, mas cobertas pela aba atual.
+      const noTopo = await el
+        .evaluate((e) => {
+          if (!e.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true })) return false;
+          e.scrollIntoView({ block: 'center' });
+          const r = e.getBoundingClientRect();
+          if (r.width === 0 || r.height === 0) return false;
+          const topo = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
+          return !!topo && (e.contains(topo) || topo.contains(e));
+        })
+        .catch(() => false);
+      if (noTopo) return el;
+    }
+    await new Promise((r) => setTimeout(r, 200));
+  }
+  throw new Error(`texto visível não encontrado: "${texto}"`);
+};
 const clicar = async (texto, timeout = 15000) => {
   for (let i = 0; ; i++) {
-    try { const el = await page.waitForSelector(`::-p-text(${texto})`, { timeout, visible: true }); await el.click(); return; }
+    try { await (await visivel(texto, timeout)).click(); return; }
     catch (e) { if (i >= 3 || !/detached|not clickable/i.test(String(e))) throw e; await new Promise((r) => setTimeout(r, 300)); }
   }
 };
 const aba = async (nome) => { const el = await page.waitForSelector('a[role=tab][href="/' + nome.toLowerCase() + '"]', { timeout: 10000 }); await el.click(); };
-const ver = (texto, timeout = 15000) => page.waitForSelector(`::-p-text(${texto})`, { timeout, visible: true });
+const ver = (texto, timeout = 15000) => visivel(texto, timeout);
 
 await passo('abre o app (Hoje, sem fichas)', async () => { await page.goto(url, { waitUntil: 'networkidle0' }); await ver('Nenhuma ficha ativa', 30000); });
 await passo('vai para Fichas', async () => { await clicar('Criar ficha'); await ver('Nome da ficha', 10000).catch(() => page.waitForSelector('input')); });
@@ -84,6 +108,19 @@ await passo('Progresso mostra histórico e volume', async () => {
   await aba('Progresso');
   await ver('Histórico');
   await ver('Peito');
+});
+await passo('detalhe do treino a partir do histórico', async () => {
+  await clicar('· 2 séries'); // texto exclusivo da linha do histórico ("Treino A" também existe na aba Hoje, montada por trás)
+  await ver('Duração');
+  await ver('Movidos'); // métricas exclusivas da tela de detalhe
+  await page.goBack();
+});
+await passo('evolução do exercício a partir dos recordes', async () => {
+  await aba('Progresso');
+  await clicar('Supino reto com barra');
+  await ver('1RM estimado por treino');
+  await page.screenshot({ path: process.argv[3] + '/evolucao.png' });
+  await page.goBack();
 });
 await passo('dados persistem após recarregar', async () => {
   await page.reload({ waitUntil: 'networkidle0' });

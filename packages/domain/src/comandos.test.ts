@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   adicionarItem, adicionarTreino, agruparItens, aposSerie, ativarFicha, avaliarVolume, concluirSessao, criarExercicioPersonalizado,
   criarFicha, descansoSeg, e1rm, estadoInicialDominio, iniciarSessao, progressoPorExercicio, rampaAquecimento, reduzirDominio,
-  registrarSerie, removerItem, semanaIso, sugerirCarga, superaRecorde, verificarInatividade, volumeSemanal,
+  registrarSerie, removerItem, semanaIso, sugerirCarga, superaRecorde, verificarInatividade, volumeSemanal, historicoDoExercicio,
   type Decisao, type EstadoDominio, type Medidas, type Prescricao,
 } from './index';
 
@@ -100,10 +100,21 @@ describe('progresso', () => {
     expect(superaRecorde({ cargaKg: 60, e1rmKg: 80 }, cr(50, 8))).toBe(false);
   });
 
-  it('volume semanal: séries efetivas (RIR ≤ 3 ou não informado) por grupo muscular', () => {
+  it('volume semanal: séries efetivas (RIR ≤ 3 ou não informado), principal = 1 e secundário = 0,5', () => {
     const e = comSessao([['trabalho', cr(60, 10, 2)], ['trabalho', cr(60, 10, 5)], ['trabalho', cr(60, 10)]]);
     const semana = semanaIso(e.execucao.sessoes['s1']!.iniciadaEm);
-    expect(volumeSemanal(e.execucao, () => ['peito', 'triceps'], semana)).toEqual({ peito: 2, triceps: 2 });
+    const grupos = () => [{ grupo: 'peito', peso: 1 }, { grupo: 'triceps', peso: 0.5 }];
+    expect(volumeSemanal(e.execucao, grupos, semana)).toEqual({ peito: 2, triceps: 1 }); // RIR 5 não conta
+  });
+
+  it('histórico do exercício: melhor série de trabalho por sessão encerrada (drop e aquecimento fora)', () => {
+    const e = comSessao([['aquecimento', cr(40, 8)], ['trabalho', cr(60, 10)], ['trabalho', cr(65, 6)], ['drop', cr(50, 12)]]);
+    const [p] = historicoDoExercicio(e.execucao, 'supino');
+    expect(p!.melhor).toEqual(cr(60, 10)); // e1RM 80 > 65×6 (78)
+    expect(p!.e1rmKg).toBe(80);
+    expect(p!.series).toBe(3); // trabalho + drop
+    expect(p!.tonelagemKg).toBe(600 + 390 + 600);
+    expect(historicoDoExercicio(e.execucao, 'outro')).toEqual([]);
   });
 
   it('semana ISO correta na virada de ano', () => {

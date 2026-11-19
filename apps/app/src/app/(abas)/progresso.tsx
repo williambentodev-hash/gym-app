@@ -1,5 +1,6 @@
 // Progresso (01-dominio §6–7): volume semanal por grupo, recordes e histórico — tudo projetado dos eventos.
-import { avaliarVolume, progressoPorExercicio, semanaIso, volumeSemanal } from '@gym/domain';
+import { avaliarVolume, PESO_PRINCIPAL, PESO_SECUNDARIO, progressoPorExercicio, semanaIso, volumeSemanal } from '@gym/domain';
+import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
 import { NOMES_GRUPOS } from '../../aplicacao/catalogo';
@@ -15,10 +16,11 @@ export default function Progresso() {
   const [semanasAtras, setSemanasAtras] = useState(0);
   const semana = semanaIso(new Date(Date.now() - semanasAtras * 7 * 86_400_000).toISOString());
 
-  // Volume: só o grupo PRINCIPAL conta (abordagem conservadora; secundários ficam para depois).
+  // Contagem fracionada: grupo principal = 1 série, cada secundário = 0,5.
   const volume = useMemo(() => volumeSemanal(estado.execucao, (id) => {
     const e = catalogo.porId.get(id);
-    return e && e.grupoPrincipal !== 'cardio' ? [e.grupoPrincipal] : [];
+    if (!e) return [];
+    return [{ grupo: e.grupoPrincipal, peso: PESO_PRINCIPAL }, ...e.gruposSecundarios.map((g) => ({ grupo: g, peso: PESO_SECUNDARIO }))].filter((x) => x.grupo !== 'cardio');
   }, semana), [estado.execucao, catalogo.porId, semana]);
   const avaliacao = avaliarVolume(volume);
   const progresso = useMemo(() => progressoPorExercicio(estado.execucao), [estado.execucao]);
@@ -45,7 +47,7 @@ export default function Progresso() {
         </View>
       }>
         <Cartao>
-          <Text style={tipo.nota}>Séries efetivas por grupo muscular. Faixa de referência: {FAIXA.min}–{FAIXA.max} por semana.</Text>
+          <Text style={tipo.nota}>Séries efetivas por grupo muscular (principal = 1, secundário = 0,5). Faixa de referência: {FAIXA.min}–{FAIXA.max} por semana.</Text>
           {Object.keys(avaliacao).length === 0 ? <Text style={tipo.apoio}>Nenhuma série nesta semana.</Text> : null}
           {Object.entries(avaliacao).sort((a, b) => b[1].series - a[1].series).map(([g, a]) => {
             const cor = a.status === 'dentro' ? cores.sucesso : a.status === 'abaixo' ? cores.textoSecundario : cores.alerta;
@@ -53,7 +55,7 @@ export default function Progresso() {
               <View key={g} style={{ gap: 4 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                   <Text style={tipo.corpo}>{NOMES_GRUPOS[g] ?? g}</Text>
-                  <Text style={[tipo.numero, { color: cor }]}>{a.series}</Text>
+                  <Text style={[tipo.numero, { color: cor }]}>{a.series.toLocaleString('pt-BR', { maximumFractionDigits: 1 })}</Text>
                 </View>
                 <View style={{ height: 6, borderRadius: raio.pilula, backgroundColor: cores.superficieElevada, overflow: 'hidden' }}>
                   <View style={{ position: 'absolute', left: `${(FAIXA.min / maxBarra) * 100}%`, width: `${((FAIXA.max - FAIXA.min) / maxBarra) * 100}%`, top: 0, bottom: 0, backgroundColor: cores.acentoSuave }} />
@@ -74,7 +76,7 @@ export default function Progresso() {
               return (
                 <View key={p.exercicioId}>
                   {i > 0 ? <Separador /> : null}
-                  <Linha titulo={catalogo.porId.get(p.exercicioId)?.nome ?? 'Exercício'} detalhe={`${p.sessoes} treino${p.sessoes === 1 ? '' : 's'} · ${p.series} série${p.series === 1 ? '' : 's'}${p.tonelagemKg ? ` · ${kg(Math.round(p.tonelagemKg))} kg movidos` : ''}`} direita={<Text style={[tipo.numero, { color: cores.acento }]}>{valor}</Text>} />
+                  <Linha onPress={() => router.push({ pathname: '/exercicio', params: { id: p.exercicioId } })} titulo={catalogo.porId.get(p.exercicioId)?.nome ?? 'Exercício'} detalhe={`${p.sessoes} treino${p.sessoes === 1 ? '' : 's'} · ${p.series} série${p.series === 1 ? '' : 's'}${p.tonelagemKg ? ` · ${kg(Math.round(p.tonelagemKg))} kg movidos` : ''}`} direita={<Text style={[tipo.numero, { color: cores.acento }]}>{valor}</Text>} />
                 </View>
               );
             })}
@@ -89,6 +91,7 @@ export default function Progresso() {
               <View key={s.sessaoId}>
                 {i > 0 ? <Separador /> : null}
                 <Linha
+                  onPress={() => router.push({ pathname: '/sessao/[sessaoId]', params: { sessaoId: s.sessaoId } })}
                   titulo={nomeDoTreino(estado, s.fichaId, s.treinoId)}
                   detalhe={`${dataCurta(s.iniciadaEm)} · ${tempo(duracaoSessao(s))} · ${s.series.filter((x) => x.tipo !== 'aquecimento').length} séries${s.status === 'encerrada_inatividade' ? ' · encerrado por inatividade' : ''}`}
                 />
