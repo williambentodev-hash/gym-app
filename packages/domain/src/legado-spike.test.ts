@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { estadoInicial, reduzir, tonelagem, type SerieRegistrada } from './index';
+import { estadoInicial, reduzir, tonelagem, type SerieRegistrada } from './legado-spike';
 
 const serie = (p: Partial<SerieRegistrada> = {}): SerieRegistrada => ({
   type: 'SerieRegistrada',

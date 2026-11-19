@@ -1,4 +1,4 @@
-# Fase 4 — Modelo de eventos de domínio (rascunho para revisão)
+# Fase 4 — Modelo de eventos de domínio (v1, aceito no [ADR-0012](../adr/0012-catalogo-de-eventos-v1.md))
 
 > Eventos são **contratos permanentes** ([ADR-0006](../adr/0006-estrategia-de-sincronizacao-offline.md), regra 9): depois de gravados em algum aparelho, não podem ser renomeados nem mudar de significado. Este documento é revisado **antes** de qualquer código. Itens 🔥 aguardam decisão.
 
@@ -20,7 +20,7 @@
 ```ts
 type Modalidade = 'carga_repeticoes' | 'peso_corporal' | 'tempo' | 'cardio';   // 01-dominio §2
 type Tecnica    = 'normal' | 'drop_set' | 'rest_pause';                        // 01-dominio §3
-type TipoSerie  = 'aquecimento' | 'trabalho';                                  // 01-dominio §4
+type TipoSerie  = 'aquecimento' | 'trabalho' | 'drop';                          // ADR-0012: drop = série própria
 
 type Prescricao = {
   series: number;                              // ≥ 1
@@ -39,9 +39,6 @@ type Medidas =
   | { modalidade: 'peso_corporal'; reps: number; cargaAdicionalKg?: number; rir?: number }  // negativa = assistência
   | { modalidade: 'tempo'; duracaoSeg: number; cargaAdicionalKg?: number }
   | { modalidade: 'cardio'; duracaoSeg: number; distanciaM?: number; intensidade?: number };
-
-// Drop-set / rest-pause: segmentos da mesma série (01-dominio §3).
-type Segmento = Medidas;
 ```
 
 ## 3. Catálogo de eventos v1
@@ -80,8 +77,8 @@ Todos com `schemaVersion: 1`. O envelope (`eventId`, `deviceId`, `ocorridoEm`, `
 | Evento | Payload | Observação |
 |---|---|---|
 | `SessaoIniciada` | `sessaoId, fichaId, treinoId, snapshot` | `snapshot = { blocos: [{ blocoId, itens: [{ itemId, exercicioId, modalidade, prescricao }] }] }`: cópia da prescrição (01-dominio §8) |
-| `SerieRegistrada` | `sessaoId, serieId, itemId, exercicioId, tipo, medidas, segmentos?` | `exercicioId` explícito: pode diferir do snapshot se houve substituição |
-| `SerieCorrigida` | `sessaoId, serieId, tipo, medidas, segmentos?` | só com sessão em andamento |
+| `SerieRegistrada` | `sessaoId, serieId, itemId, exercicioId, tipo, medidas` | `exercicioId` explícito: pode diferir do snapshot se houve substituição |
+| `SerieCorrigida` | `sessaoId, serieId, tipo, medidas` | só com sessão em andamento |
 | `SerieRemovida` | `sessaoId, serieId` | só com sessão em andamento |
 | `ExercicioSubstituido` | `sessaoId, itemId, exercicioId, modalidade` | aparelho ocupado: troca na hora |
 | `ExercicioPulado` | `sessaoId, itemId` | |
@@ -124,11 +121,11 @@ Todos com `schemaVersion: 1`. O envelope (`eventId`, `deviceId`, `ocorridoEm`, `
 - Mudança **incompatível**: `schemaVersion: 2` e um **upcaster** `v1 → v2` no domínio, aplicado na leitura. O log nunca é reescrito.
 - **Proibido:** reutilizar um `type` com outro significado. Se o conceito mudar, nasce um evento novo.
 
-## 5. 🔥 Pontos para decisão do dono do produto
+## 5. Decisões de produto (padrão de mercado, ADR-0012)
 
-1. **Drop-set no registro:** cada drop é um *segmento* da mesma série (proposta), ou uma série separada marcada como "drop"? Segmento conta como 1 série efetiva no volume (01-dominio §3).
-2. **Bi-set na execução:** o app conduz a ordem (A1 → B1 → A2 → B2…) e só dispara o descanso no fim da volta (proposta), ou deixa livre?
-3. **`SugestaoRespondida` já no MVP:** registrar se você aceitou, ajustou ou ignorou a carga sugerida custa quase nada e permite, no futuro, medir se a Orientação acerta. Proposta: sim.
+1. **Drop-set / rest-pause:** cada etapa é uma série própria com `tipo: 'drop'`. Conta no volume e na tonelagem; não conta para recorde nem progressão. (Substitui a ideia de "segmentos" e o trecho correspondente de 01-dominio §3.)
+2. **Bi-set:** o app sugere a alternância sem bloquear outra ordem; o descanso só dispara no fim da volta.
+3. **`SugestaoRespondida`:** entra no MVP.
 
 ## 6. Próximos passos da Fase 4
 
