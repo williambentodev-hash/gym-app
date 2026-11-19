@@ -16,7 +16,7 @@ docs/
 |---|---|---|
 | 0 | Descoberta: visão, requisitos, atributos de qualidade | ✅ [visão](docs/architecture/00-visao-do-produto.md) |
 | 1 | Domínio: bounded contexts, event storming | ✅ [domínio](docs/architecture/01-dominio.md) |
-| 2 | Visão arquitetural: estilo, C4, ADRs | 🟡 em andamento |
+| 2 | Visão arquitetural: estilo, C4, ADRs | 🟡 [visão arquitetural](docs/architecture/02-visao-arquitetural.md) |
 | 3 | Walking skeleton: repo, CI/CD, IaC | ⚪ |
 | 4 | Modelagem: DDD tático, dados, APIs | ⚪ |
 | 5 | Segurança e LGPD | ⚪ |
@@ -27,7 +27,9 @@ docs/
 ## Stack atual
 
 - **Backend:** TypeScript no Cloudflare Workers ([ADR-0004](docs/adr/0004-typescript-como-linguagem-do-backend.md), [ADR-0005](docs/adr/0005-cloudflare-como-plataforma-de-nuvem.md))
-- **Clientes:** web + mobile (tecnologia a decidir na Fase 2)
+- **Clientes:** Expo — Android (APK, sem loja) + web/PWA ([ADR-0007](docs/adr/0007-frontend-expo-universal.md))
+- **Sincronização:** local-first, log de eventos por usuário em Durable Objects ([ADR-0006](docs/adr/0006-estrategia-de-sincronizacao-offline.md))
+- **Autenticação:** Better Auth + Google ([ADR-0008](docs/adr/0008-autenticacao.md))
 
 ## Decisões registradas
 
@@ -40,4 +42,5 @@ docs/
 | [0005](docs/adr/0005-cloudflare-como-plataforma-de-nuvem.md) | Cloudflare como plataforma | Aceito |
 | [0006](docs/adr/0006-estrategia-de-sincronizacao-offline.md) | Sincronização local-first com log de eventos por usuário | Aceito |
 | [0007](docs/adr/0007-frontend-expo-universal.md) | Frontend universal com Expo (iOS, Android, web); distribuição sem lojas | Aceito |
-| [0008](docs/adr/0008-autenticacao.md) | Autenticação: Better Auth no Worker + login Google | Proposto |
+| [0008](docs/adr/0008-autenticacao.md) | Autenticação: Better Auth no Worker + login Google | Aceito |
+| [0009](docs/adr/0009-estrutura-do-monorepo.md) | Monorepo pnpm + Turborepo, fronteiras verificadas com dependency-cruiser | Proposto |

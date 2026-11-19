@@ -1,6 +1,6 @@
 # ADR-0008: Autenticação com Better Auth no Worker e login Google
 
-- **Status:** Proposto
+- **Status:** Aceito
 - **Data:** 2026-11-18
 - **Fase:** 2
 - **Relacionado:** [ADR-0005](0005-cloudflare-como-plataforma-de-nuvem.md), [ADR-0006](0006-estrategia-de-sincronizacao-offline.md), [ADR-0007](0007-frontend-expo-universal.md)
@@ -24,7 +24,7 @@
 | D | **Supabase Auth** | Gratuito | Projetos gratuitos **pausam por inatividade**: com 20 usuários, o risco de o login ficar fora do ar é real |
 | E | **Implementação própria** | Aprendizado | Construir autenticação é o exemplo clássico do que **não** construir; contraria a classificação como subdomínio genérico |
 
-## Decisão (proposta)
+## Decisão
 
 **Opção A: Better Auth no Worker, com tabelas de identidade no D1.**
 
