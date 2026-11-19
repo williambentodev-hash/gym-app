@@ -26,6 +26,15 @@ Observação: a partir do Node 25 o `corepack` não vem mais junto; o pnpm foi i
 | S5 | APK sem custo + sideload | ✅ **Passou** | APK instalado por sideload no Android do dono do produto. **Em modo avião**, eventos gravados persistiram depois de fechar e reabrir o app (contador do SQLite preservado). Os logs da tela somem ao reabrir porque são estado em memória, por design: a fonte da verdade é o SQLite |
 | S5 (detalhes) | | | **Decisão:** build na nuvem com EAS, plano gratuito (conta Expo do dono do produto). Android SDK local descartado (~10 GB). `eas.json` com perfil `preview` (`distribution: internal`, `buildType: apk`). Keystore gerada e guardada pela Expo. Primeiro build: **~15 min** do envio ao APK (fila gratuita + build). Monorepo pnpm funcionou no EAS sem configuração extra. Falta confirmar a instalação por sideload no aparelho |
 
+## Fitness functions de arquitetura (ADR-0009): ativas
+
+`pnpm lint:arch` (dependency-cruiser 18) aplica as regras R1, R2, R3, R4, R5, R7 e "sem ciclos" do ADR-0009. A R6 (Orientação sem estado) não é verificável por grafo de dependências e fica para revisão de código e testes.
+
+- **Teste negativo:** dois arquivos com violações plantadas (domínio importando `react-native`; API importando o app) foram detectados, com **exit code 2**, que vai quebrar a CI. Regra que nunca falhou não prova nada: sempre testar a fitness function com uma violação real.
+- O resolvedor entende o monorepo: `@gym/domain` é resolvido até `packages/domain/src/index.ts` pelo campo `exports`.
+- **Aprendizado:** o dependency-cruiser **recusa expressões regulares inseguras** (quantificadores aninhados, risco de ReDoS). Padrões simples como `node_modules/zod/` bastam.
+- `pnpm docs:arch` gera o grafo real de dependências em [dependencias.mmd](dependencias.mmd) (Mermaid): um diagrama derivado do código, que não fica desatualizado.
+
 ## Como o S1 foi testado (reproduzível)
 
 1. `npx expo export --platform web --output-dir <dir>`
