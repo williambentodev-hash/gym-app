@@ -1,0 +1,22 @@
+{
+  "name": "gym-app",
+  "private": true,
+  "packageManager": "pnpm@12.21.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "lint:arch": "depcruise apps packages --config .dependency-cruiser.cjs",
+    "docs:arch": "depcruise apps/app/App.tsx apps/api/src packages --config .dependency-cruiser.cjs --output-type mermaid --output-to docs/architecture/dependencias.mmd"
+  },
+  "devDependencies": {
+    "dependency-cruiser": "^18.8.0",
+    "turbo": "^2.11.12",
+    "typescript": "~6.0.3"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "gym-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  // ADR-0010: mídias do catálogo (e futuramente a web) como arquivos estáticos.
+  // Requisições a assets existentes são servidas direto pela CDN, sem executar o Worker
+  // (não consomem a cota de requisições do Worker).
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "vars": {
+    "BETTER_AUTH_URL": "https://gym-api.gym-api.workers.dev"
+  },
+  // Identidade (ADR-0008): usuários, contas OAuth e sessões. Dados de treino NÃO ficam aqui (ADR-0006).
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "gym-identity",
+      "database_id": "62efcd12-c483-42bc-9604-b2c486e66f77",
+      "migrations_dir": "migrations"
+    }
+  ]
+  // Segredos (wrangler secret put): BETTER_AUTH_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
+}

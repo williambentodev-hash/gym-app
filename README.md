@@ -17,7 +17,7 @@ docs/
 | 0 | Descoberta: visão, requisitos, atributos de qualidade | ✅ [visão](docs/architecture/00-visao-do-produto.md) |
 | 1 | Domínio: bounded contexts, event storming | ✅ [domínio](docs/architecture/01-dominio.md) |
 | 2 | Visão arquitetural: estilo, C4, ADRs | ✅ [visão arquitetural](docs/architecture/02-visao-arquitetural.md) |
-| 3 | Spike técnico + walking skeleton: repo, CI/CD, IaC | 🟡 em andamento |
+| 3 | Spike técnico + walking skeleton: repo, CI/CD, IaC | 🟡 spike ✅ ([resultados](docs/architecture/03-spike.md)) · walking skeleton ⏳ |
 | 4 | Modelagem: DDD tático, dados, APIs | ⚪ |
 | 5 | Segurança e LGPD | ⚪ |
 | 6 | Features incrementais | ⚪ |
@@ -44,3 +44,5 @@ docs/
 | [0007](docs/adr/0007-frontend-expo-universal.md) | Frontend universal com Expo (iOS, Android, web); distribuição sem lojas | Aceito |
 | [0008](docs/adr/0008-autenticacao.md) | Autenticação: Better Auth no Worker + login Google | Aceito |
 | [0009](docs/adr/0009-estrutura-do-monorepo.md) | Monorepo pnpm + Turborepo, fronteiras verificadas com dependency-cruiser | Aceito |
+| [0010](docs/adr/0010-midias-do-catalogo-como-assets-estaticos.md) | Mídias do catálogo como Static Assets + download explícito para offline | Aceito |
+| [0011](docs/adr/0011-fonte-do-conteudo-do-catalogo.md) | Fonte do catálogo: ExerciseGymGifsDB, uso pessoal, referenciado (não redistribuído) | Aceito |

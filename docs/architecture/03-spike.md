@@ -1,0 +1,66 @@
+# Fase 3 — Spike técnico
+
+> Objetivo: validar os riscos da [visão arquitetural §5](02-visao-arquitetural.md#5-riscos-técnicos--spike-da-fase-3) **antes** de escrever funcionalidades. Branch: `spike/fase-3`.
+
+## Ambiente
+
+| Ferramenta | Versão |
+|---|---|
+| Node.js | 26.13.1 (LTS) |
+| pnpm | 12.21.0 |
+| Expo SDK | 58 (React Native 0.88, React 19.3) |
+| TypeScript | 6.0 |
+| Turborepo | 2.11 |
+
+Observação: a partir do Node 25 o `corepack` não vem mais junto; o pnpm foi instalado via `npm i -g pnpm`.
+
+## Resultados
+
+| # | Risco | Status | Evidência / aprendizado |
+|---|---|---|---|
+| S2 | Expo + pnpm + Metro em monorepo | ✅ **Passou** | Desde o SDK 52, o Expo configura o Metro para monorepos automaticamente, sem `metro.config.js`. O pnpm funciona no modo isolado padrão (suportado desde o SDK 54), e o plano B `nodeLinker: hoisted` não foi necessário. O pacote `@gym/domain` é consumido **direto do código TypeScript** (`exports: ./src/index.ts`, sem build): os bundles web e Android foram gerados e contêm o código do domínio. `pnpm typecheck` via Turborepo passa nos dois pacotes |
+| S1 | SQLite WASM na web | ✅ **Passou** | `expo-sqlite` 58 tem suporte oficial à web (wa-sqlite em WASM, sem rótulo de experimental). Requisitos: `.wasm` em `assetExts` no Metro e cabeçalhos `Cross-Origin-Embedder-Policy: credentialless` + `Cross-Origin-Opener-Policy: same-origin`, no dev server (Metro) **e em produção** (o Worker vai precisar servi-los). Teste automatizado: build web de produção servida com esses cabeçalhos e aberta duas vezes no Edge headless com o mesmo perfil. Os dados **persistiram** entre execuções (0 → 1.000 → 2.000 eventos), com `crossOriginIsolated=true`. A **mesma porta `LocalDb`** atende nativo e web, então o plano B (Vite) não foi necessário. Limitação na web: `withExclusiveTransactionAsync` não existe |
+| S4 | Reconstruir o estado a partir de 1.000 eventos em < 1 s | ✅ **Passou** | **Android físico** (Samsung, Expo Go, bundle de desenvolvimento, que é mais lento que o de release): 1.000 eventos em **45 ms**, 2.000 em **71 ms**, 3.000 em **103 ms**. Crescimento linear de ~34 ms por 1.000 eventos, então o limite de 1 s chegaria por volta de **~29 mil eventos ≈ 3 anos de uso intenso** por usuário (estimativa de 10 mil/ano, ADR-0006). Snapshots de estado só serão necessários bem depois do MVP. Gravação em lote: 1.000 eventos em 525–825 ms numa transação (< 1 ms por evento). **Web (desktop):** 1.000 em 18 ms, 2.000 em 32 ms. Em ambos, a leitura do SQLite domina (~80%) e o reducer puro é desprezível |
+| S3 | Login Google (APK + web) com Better Auth no Worker | ✅ **Passou (Android)** / web ⏳ | **No APK:** login Google pelo navegador com retorno ao app via deep link `gymapp://`; `/api/me` respondeu 200 com a sessão enviada como header `Cookie`; a sessão sobreviveu a fechar e reabrir o app (SecureStore); o modo avião continuou funcionando com usuário logado. **Servidor:** Better Auth 1.7.25 com fábrica `createAuth(env)` por requisição; D1 `gym-identity` com schema gerado pela CLI contra um SQLite em memória e aplicado como **migração versionada do Wrangler** (em vez da rota HTTP de migração sugerida pela documentação); `on delete cascade` nas tabelas facilita a exclusão (LGPD); Worker com 341 KB gzip e startup de 46 ms. **Web:** fica para quando a web for servida pelo próprio Worker (mesma origem, cookie do navegador). Detalhes da publicação: Worker `gym-api` publicado em `https://gym-api.gym-api.workers.dev` (Hono, `/api/health`). Na primeira publicação, o Wrangler registrou o subdomínio `workers.dev` da conta automaticamente. O DNS respondeu logo, mas o **certificado TLS levou ~5 min** (curl com erro 35 até lá). Próximo: cliente OAuth no Google Cloud Console |
+| S6 | Animação em loop offline | ✅ **Passou** | Animação própria (GIF de 30 KB, gerado em código) servida como **Static Asset** do Worker com `Cache-Control: immutable` ([ADR-0010](../adr/0010-midias-do-catalogo-como-assets-estaticos.md)). O app baixa para `Paths.document/midias` (arquivo `.part` + `move`) e exibe com `expo-image` (`cachePolicy="none"`). No Android: primeira abertura "baixada-agora"; depois "arquivo-local"; **modo avião + app fechado e reaberto: animação tocando do arquivo local**. **Contraprova:** apagar a mídia em modo avião faz o carregamento falhar, o que prova que não havia um cache escondido servindo a imagem. Ao voltar a rede, baixa de novo |
+| S5 | APK sem custo + sideload | ✅ **Passou** | APK instalado por sideload no Android do dono do produto. **Em modo avião**, eventos gravados persistiram depois de fechar e reabrir o app (contador do SQLite preservado). Os logs da tela somem ao reabrir porque são estado em memória, por design: a fonte da verdade é o SQLite |
+| S5 (detalhes) | | | **Decisão:** build na nuvem com EAS, plano gratuito (conta Expo do dono do produto). Android SDK local descartado (~10 GB). `eas.json` com perfil `preview` (`distribution: internal`, `buildType: apk`). Keystore gerada e guardada pela Expo. Primeiro build: **~15 min** do envio ao APK (fila gratuita + build). Monorepo pnpm funcionou no EAS sem configuração extra. Falta confirmar a instalação por sideload no aparelho |
+
+## Conclusão do spike (2026-11-18)
+
+**Todos os 6 riscos técnicos foram eliminados.** Nenhum plano B foi acionado, e a arquitetura da Fase 2 se sustentou.
+
+| Decisão | Efeito do spike |
+|---|---|
+| ADR-0006 (sync com log de eventos) | Confirmada: rebuild a partir dos eventos é barato (45 ms/1.000 no Android); snapshots só em ~3 anos |
+| ADR-0007 (Expo universal) | Confirmada: uma porta `LocalDb` para nativo e web; APK sem loja funcionando |
+| ADR-0008 (Better Auth + Google) | Confirmada no Android; web pendente até ser servida pelo Worker |
+| ADR-0009 (monorepo) | Confirmada: pacotes TS sem build; fitness functions ativas |
+| R2 para mídias (ADR-0005/0006) | **Alterada** pelo ADR-0010: Static Assets + download explícito |
+| Fonte do catálogo | **Nova** decisão, ADR-0011 |
+
+**Código do spike:** foi incorporado à `main` como ponto de partida do walking skeleton. Os arquivos marcados com `⚠️ Código de spike` (tela `App.tsx`, reducer de teste no domínio) **serão substituídos**, não evoluídos. Já a infraestrutura (monorepo, Metro, EAS, Worker, D1, migrations, Better Auth, fitness functions) permanece.
+
+## Fitness functions de arquitetura (ADR-0009): ativas
+
+`pnpm lint:arch` (dependency-cruiser 18) aplica as regras R1, R2, R3, R4, R5, R7 e "sem ciclos" do ADR-0009. A R6 (Orientação sem estado) não é verificável por grafo de dependências e fica para revisão de código e testes.
+
+- **Teste negativo:** dois arquivos com violações plantadas (domínio importando `react-native`; API importando o app) foram detectados, com **exit code 2**, que vai quebrar a CI. Regra que nunca falhou não prova nada: sempre testar a fitness function com uma violação real.
+- O resolvedor entende o monorepo: `@gym/domain` é resolvido até `packages/domain/src/index.ts` pelo campo `exports`.
+- **Aprendizado:** o dependency-cruiser **recusa expressões regulares inseguras** (quantificadores aninhados, risco de ReDoS). Padrões simples como `node_modules/zod/` bastam.
+- `pnpm docs:arch` gera o grafo real de dependências em [dependencias.mmd](dependencias.mmd) (Mermaid): um diagrama derivado do código, que não fica desatualizado.
+
+## Como o S1 foi testado (reproduzível)
+
+1. `npx expo export --platform web --output-dir <dir>`
+2. Servidor estático simples (Node `http`) adicionando os dois cabeçalhos COOP/COEP, para simular o Worker
+3. `puppeteer-core` dirigindo o Edge instalado, com perfil persistente, abrindo `/?auto` duas vezes. O modo `?auto` da tela de spike grava 1.000 eventos, reconstrói o estado e escreve o resultado em `document.title`
+
+Aprendizado: o `--dump-dom --virtual-time-budget` do navegador headless **não** espera o SQLite, porque ele roda num web worker fora do tempo virtual. Foi preciso controlar o navegador de fato.
+
+**Falso alarme no teste do Android:** a tela mostrou "Estado (supino): {}" depois do rebuild. Não era bug do reducer, e sim do **gerador de dados de teste**: com 10 exercícios e `i % 5 === 0` para marcar aquecimento, todo índice de supino (múltiplo de 10) virava aquecimento, que corretamente fica fora das métricas. Corrigido para `i % 7`. Lição: dados sintéticos com padrões periódicos podem esconder ou simular bugs. Os testes de propriedade do motor de sync (ADR-0006) devem usar geração **aleatória com seed**, não aritmética modular.
+
+## Cuidados registrados
+
+- **Versões duplicadas de React / React Native no monorepo quebram o app.** Diagnóstico: `pnpm why --depth=10 react-native`. Usar sempre `npx expo install <pacote>` no app, para obter versões compatíveis com o SDK.
+- O template do Expo inclui um `AGENTS.md` recomendando consultar a documentação **da versão do SDK** antes de usar qualquer API do Expo, porque elas mudam a cada versão. Mantido no repositório.

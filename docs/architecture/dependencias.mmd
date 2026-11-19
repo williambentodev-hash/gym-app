@@ -1,0 +1,32 @@
+flowchart LR
+
+subgraph 0["apps"]
+subgraph 1["api"]
+subgraph 2["src"]
+3["auth.ts"]
+4["index.ts"]
+end
+end
+subgraph 5["app"]
+6["App.tsx"]
+subgraph 7["src"]
+subgraph 8["infra"]
+9["auth-client.ts"]
+A["local-db.ts"]
+B["midias-offline.ts"]
+end
+end
+end
+end
+subgraph C["packages"]
+subgraph D["domain"]
+subgraph E["src"]
+F["index.ts"]
+end
+end
+end
+4-->3
+6-->9
+6-->A
+6-->B
+6-->F
