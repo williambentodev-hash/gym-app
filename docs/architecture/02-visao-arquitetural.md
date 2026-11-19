@@ -48,10 +48,10 @@ flowchart TB
     end
 
     subgraph CF["Cloudflare (plano gratuito)"]
-        W["<b>Worker API</b><br/>TypeScript, Hono<br/><i>/auth, /sync, /catalog<br/>+ assets da web</i>"]
+        W["<b>Worker API</b><br/>TypeScript, Hono<br/><i>/auth, /sync, /catalog</i>"]
+        AS[("<b>Static Assets</b><br/>CDN<br/><i>web + animações dos exercícios</i>")]
         DO[("<b>UserStore</b><br/>Durable Object + SQLite<br/><i>1 por usuário: log de eventos</i>")]
         D1[("<b>D1</b><br/>SQLite<br/><i>identidade + catálogo</i>")]
-        R2[("<b>R2</b><br/><i>animações dos exercícios</i>")]
     end
 
     G["Google OAuth"]
@@ -59,7 +59,7 @@ flowchart TB
     U --> APP
     APP <-- "lê / escreve (sempre)" --> LDB
     APP -- "HTTPS: push/pull de eventos,<br/>catálogo, login" --> W
-    APP -- "HTTPS: download das mídias (CDN)" --> R2
+    APP -- "HTTPS: download das mídias (CDN)" --> AS
     W -- "idFromName(userId)" --> DO
     W -- "sessões, usuários, catálogo" --> D1
     W -- "OAuth" --> G
@@ -68,23 +68,23 @@ flowchart TB
     classDef db fill:#438dd5,color:#fff,stroke:#2e6295
     classDef external fill:#999,color:#fff,stroke:#6b6b6b
     class APP,W container
-    class LDB,DO,D1,R2 db
+    class LDB,DO,D1,AS db
     class G external
 ```
 
 **Detalhes que fazem diferença:**
 
-- **O mesmo Worker serve a web e a API**, na mesma origem (subdomínio gratuito `*.workers.dev`). Na web não há CORS, e é possível usar cookie de sessão. O app Android usa token *bearer*.
+- **O mesmo Worker serve a web e a API**, na mesma origem (subdomínio gratuito `*.workers.dev`). Na web não há CORS, e é possível usar cookie de sessão. O app Android guarda a sessão no SecureStore e a envia como header `Cookie` (validado no spike S3).
 - **Uma ressalva de segurança:** se o SQLite WASM exigir cabeçalhos COOP/COEP, o login Google não pode usar *popup* (COOP bloqueia a comunicação entre janelas). Usaremos o fluxo de **redirecionamento**. Isso será validado no spike.
-- **As mídias vão direto do R2 para o app via CDN**, sem passar pelo Worker: menos requisições contadas no limite do plano gratuito.
+- **As mídias são Static Assets servidos pela CDN** ([ADR-0010](../adr/0010-midias-do-catalogo-como-assets-estaticos.md)), sem executar o Worker e sem consumir a cota de requisições. O R2 ficou reservado para conteúdo enviado pelo usuário, depois do MVP.
 
 ## 4. Rastreabilidade: atributos de qualidade → táticas
 
 | Atributo | Táticas | ADRs |
 |---|---|---|
-| **QA-1 Offline** | Escrita local primeiro; IDs gerados no cliente; fila de pendentes; idempotência por `event_id`; interface lê só do SQLite local; cache das mídias da ficha ativa; sessão de autenticação expirada não bloqueia escrita | 0006, 0007, 0008 |
+| **QA-1 Offline** | Escrita local primeiro; IDs gerados no cliente; fila de pendentes; idempotência por `event_id`; interface lê só do SQLite local; download explícito das mídias da ficha ativa para pasta não-volátil; sessão de autenticação expirada não bloqueia escrita | 0006, 0007, 0008, 0010 |
 | **QA-2 Privacidade/LGPD** | Um Durable Object por usuário (isolamento pela topologia); exclusão = apagar o DO + linhas de identidade; exportação = log de eventos; sem terceiros com dados pessoais (exceto autenticação Google) | 0006, 0008 |
-| **QA-3 Custo zero** | Serviços gratuitos sem prazo; DOs hibernam quando ociosos; mídias via CDN; sem lojas de apps (APK por sideload) | 0005, 0007 |
+| **QA-3 Custo zero** | Serviços gratuitos sem prazo; DOs hibernam quando ociosos; mídias como Static Assets (sem cartão, fora da cota do Worker); sem lojas de apps (APK por sideload) | 0005, 0007, 0010 |
 | **QA-4 Desempenho percebido** | Gravação local otimista (< 100 ms); sincronização em segundo plano | 0006 |
 | **QA-5 Evolutividade** | Bounded contexts com fronteiras verificadas na CI; sync genérico (troca por LiveStore possível); porta `LocalDb`; hexagonal na API | 0009 |
 | **QA-6 Consistência entre dispositivos** | Ordem total definida pelo servidor; *rebase*; "vence o último" determinístico; sessões imutáveis | 0006 |

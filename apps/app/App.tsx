@@ -5,7 +5,50 @@ import { useEffect, useState } from 'react';
 import { Button, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { estadoInicial, reduzir, type EstadoProgresso, type SerieRegistrada } from '@gym/domain';
 import { abrirLocalDb, type EventoArmazenado, type LocalDb } from './src/infra/local-db';
-import { authClient, fetchAutenticado } from './src/infra/auth-client';
+import { authClient, fetchAutenticado, API_URL } from './src/infra/auth-client';
+import { Image } from 'expo-image';
+import { garantirMidia, limparMidias, type MidiaLocal } from './src/infra/midias-offline';
+
+// Spike S6: animação do exercício disponível offline.
+const URL_ANIMACAO = `${API_URL}/media/exercicios/agachamento-livre.v1.gif`;
+
+function PainelMidia() {
+  const [midia, setMidia] = useState<MidiaLocal | null>(null);
+  const [status, setStatus] = useState('');
+
+  async function carregar() {
+    try {
+      setStatus('carregando…');
+      const m = await garantirMidia(URL_ANIMACAO);
+      setMidia(m);
+      setStatus(`origem: ${m.origem}`);
+    } catch (e) {
+      setMidia(null);
+      setStatus(`falhou (sem rede e sem arquivo local?): ${String(e)}`);
+    }
+  }
+
+  useEffect(() => {
+    carregar();
+  }, []);
+
+  return (
+    <View style={styles.painel}>
+      <Text style={styles.sub}>S6 — Agachamento livre · {status}</Text>
+      <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
+        {midia ? (
+          <Image source={{ uri: midia.uri }} style={{ width: 120, height: 120 }} cachePolicy="none" contentFit="contain" />
+        ) : (
+          <View style={{ width: 120, height: 120, backgroundColor: '#eee' }} />
+        )}
+        <View style={{ gap: 8 }}>
+          <Button title="Recarregar" onPress={carregar} />
+          <Button title="Apagar mídia" color="#b00" onPress={() => { limparMidias(); setMidia(null); setStatus('apagada'); }} />
+        </View>
+      </View>
+    </View>
+  );
+}
 
 // Spike S3: login Google + chamada a uma rota protegida.
 function PainelLogin() {
@@ -121,6 +164,7 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.titulo}>Spike — {Platform.OS}</Text>
       <PainelLogin />
+      <PainelMidia />
       <Text>Eventos no SQLite local: {total}</Text>
       <View style={styles.botoes}>
         <Button title="Gravar 1.000" onPress={() => gravar1000()} disabled={!db} />

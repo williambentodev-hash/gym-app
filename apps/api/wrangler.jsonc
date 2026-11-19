@@ -5,6 +5,13 @@
   "compatibility_date": "2026-11-01",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
+  // ADR-0010: mídias do catálogo (e futuramente a web) como arquivos estáticos.
+  // Requisições a assets existentes são servidas direto pela CDN, sem executar o Worker
+  // (não consomem a cota de requisições do Worker).
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
   "vars": {
     "BETTER_AUTH_URL": "https://gym-api.gym-api.workers.dev"
   },
