@@ -2,13 +2,14 @@
 import * as Crypto from 'expo-crypto';
 import { estadoInicialDominio, reduzirDominio, type EstadoDominio } from '@gym/domain';
 import { criarMotorSync, type MotorSync } from '@gym/sync';
-import { abrirSyncStore, type SyncStoreSqlite } from '../infra/sync-store-sqlite';
+import { abrirSyncStore, apagarBancosLegados, type SyncStoreSqlite } from '../infra/sync-store-sqlite';
 import { transporteHttp } from '../infra/transporte-http';
 
 export type Nucleo = { motor: MotorSync<EstadoDominio>; store: SyncStoreSqlite };
 
 export async function iniciarNucleo(): Promise<Nucleo> {
-  const store = await abrirSyncStore('gym-v1.db'); // época v1 (ADR-0012): o banco do walking skeleton fica para trás
+  apagarBancosLegados().catch(() => undefined); // minimização: dados de teste das épocas anteriores
+  const store = await abrirSyncStore('gym-v1.db'); // época v1 (ADR-0012)
   const motor = criarMotorSync<EstadoDominio>({
     store,
     transporte: transporteHttp,

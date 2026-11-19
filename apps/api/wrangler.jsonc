@@ -23,6 +23,11 @@
     "bindings": [{ "name": "USER_STORE", "class_name": "UserStore" }]
   },
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["UserStore"] }],
+  // Rate limiting por usuário (ADR-0014). Aproximado e por localidade: proteção contra abuso/bug em laço.
+  "ratelimits": [
+    { "name": "LIMITE_SYNC", "namespace_id": "1001", "simple": { "limit": 120, "period": 60 } },
+    { "name": "LIMITE_CONTA", "namespace_id": "1002", "simple": { "limit": 10, "period": 60 } }
+  ],
   // Identidade (ADR-0008): usuários, contas OAuth e sessões. Dados de treino NÃO ficam aqui (ADR-0006).
   "d1_databases": [
     {

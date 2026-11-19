@@ -19,7 +19,7 @@ docs/
 | 2 | Visão arquitetural: estilo, C4, ADRs | ✅ [visão arquitetural](docs/architecture/02-visao-arquitetural.md) |
 | 3 | Spike técnico + walking skeleton: repo, CI/CD, IaC | ✅ [spike + walking skeleton](docs/architecture/03-spike.md) |
 | 4 | Modelagem: DDD tático, dados, APIs + telas | ✅ [eventos](docs/architecture/04-modelo-de-eventos.md) · [interface](docs/architecture/05-interface.md) |
-| 5 | Segurança e LGPD | ⚪ próxima |
+| 5 | Segurança e LGPD | ✅ [segurança e LGPD](docs/architecture/06-seguranca-lgpd.md) |
 | 6 | Features incrementais | ⚪ |
 | 7 | Operação: observabilidade, SLOs, resiliência | ⚪ |
 | 8 | Evolução: eventos, extração de serviços, offline, integrações, IA | ⚪ |
@@ -48,3 +48,4 @@ docs/
 | [0011](docs/adr/0011-fonte-do-conteudo-do-catalogo.md) | Fonte do catálogo: ExerciseGymGifsDB, uso pessoal, referenciado (não redistribuído) | Aceito |
 | [0012](docs/adr/0012-catalogo-de-eventos-v1.md) | Catálogo de eventos de domínio v1 (drop = série própria; época v1 do log) | Aceito |
 | [0013](docs/adr/0013-catalogo-curado-como-snapshot-estatico.md) | Catálogo curado (100 exercícios em PT) como snapshot estático versionado | Aceito |
+| [0014](docs/adr/0014-seguranca-e-direitos-do-titular.md) | Segurança e direitos do titular (exportar, excluir, minimização, limites) | Aceito |

@@ -44,7 +44,14 @@ export type SyncStoreSqlite = SyncStore & {
   contagens(): Promise<{ pendentes: number; confirmados: number }>;
   /** Chave-valor local (ex.: cache do catálogo). */
   meta: { ler(chave: string): Promise<string | undefined>; gravar(chave: string, valor: string): Promise<void> };
+  /** LGPD: fecha e apaga o banco local inteiro (eventos, cursor, cache). */
+  apagarBanco(): Promise<void>;
 };
+
+/** Bancos locais de épocas anteriores (spike e walking skeleton): dados de teste, apagados ao iniciar (ADR-0012/0014). */
+export async function apagarBancosLegados(): Promise<void> {
+  for (const nome of ['gym.db', 'gym-spike.db']) await SQLite.deleteDatabaseAsync(nome).catch(() => undefined);
+}
 
 /**
  * Na web, o SQLite usa OPFS com acesso EXCLUSIVO ao arquivo. Ao recarregar a página, o worker anterior pode
@@ -89,6 +96,10 @@ export async function abrirSyncStore(nome: string): Promise<SyncStoreSqlite> {
 
   return {
     deviceId,
+    async apagarBanco() {
+      await db.closeAsync();
+      await SQLite.deleteDatabaseAsync(nome);
+    },
     meta: {
       ler: lerMeta,
       gravar: async (chave, valor) => {

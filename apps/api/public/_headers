@@ -1,8 +1,14 @@
 # Isolamento cross-origin para todo o site: o SQLite da web (WASM) usa SharedArrayBuffer (spike S1).
 # COEP "credentialless" ainda permite carregar imagens de outras origens sem credenciais (ex.: GIFs do catálogo).
+# Demais cabeçalhos: endurecimento (ADR-0014). CSP fica pendente: a web do Expo injeta estilos inline (exigiria nonce/hash).
 /*
   Cross-Origin-Embedder-Policy: credentialless
   Cross-Origin-Opener-Policy: same-origin
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000
 
 # Mídias versionadas no nome do arquivo (ex.: agachamento-livre.v1.gif): conteúdo imutável (ADR-0010).
 /media/*

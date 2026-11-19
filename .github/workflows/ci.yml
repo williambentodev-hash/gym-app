@@ -38,6 +38,11 @@ jobs:
       - name: Testes
         run: pnpm test
 
+      # ADR-0014: reprova só vulnerabilidades altas/críticas em dependências de produção.
+      # (Moderadas em ferramentas de build são avaliadas manualmente; ver docs/architecture/06-seguranca-lgpd.md.)
+      - name: Auditoria de dependências
+        run: pnpm audit --prod --audit-level high
+
   deploy:
     needs: verificar
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -86,3 +91,6 @@ jobs:
           curl -fsS https://gym-api.gym-api.workers.dev/api/health
           test "$(curl -s -o /dev/null -w '%{http_code}' https://gym-api.gym-api.workers.dev/)" = "200"
           test "$(curl -s -o /dev/null -w '%{http_code}' 'https://gym-api.gym-api.workers.dev/api/sync/pull?desde=0')" = "401"
+          test "$(curl -s -o /dev/null -w '%{http_code}' https://gym-api.gym-api.workers.dev/api/conta/exportar)" = "401"
+          curl -sI https://gym-api.gym-api.workers.dev/ | grep -qi '^x-content-type-options: nosniff'
+          curl -sI https://gym-api.gym-api.workers.dev/api/health | grep -qi '^x-content-type-options: nosniff'

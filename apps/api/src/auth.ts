@@ -36,6 +36,14 @@ export function createAuth(env: AuthEnv) {
       updateAge: 60 * 60 * 24, // renova no máximo 1x por dia
     },
     plugins: [expo()],
+    // Minimização (LGPD art. 6, III; ADR-0014): o Google serve só para LOGIN, não chamamos APIs dele.
+    // Não há opção para "não guardar" os tokens OAuth; o caminho documentado é descartá-los num hook.
+    databaseHooks: {
+      account: {
+        create: { before: async (conta) => ({ data: semTokens(conta) }) },
+        update: { before: async (conta) => ({ data: semTokens(conta) }) },
+      },
+    },
     advanced: {
       ipAddress: { ipAddressHeaders: ['cf-connecting-ip'] },
     },
@@ -43,3 +51,8 @@ export function createAuth(env: AuthEnv) {
 }
 
 export type Auth = ReturnType<typeof createAuth>;
+
+/** Remove tokens OAuth do registro da conta antes da gravação. */
+function semTokens<T extends Record<string, unknown>>(conta: T): T {
+  return { ...conta, accessToken: null, refreshToken: null, idToken: null, accessTokenExpiresAt: null, refreshTokenExpiresAt: null };
+}

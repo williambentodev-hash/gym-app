@@ -21,6 +21,8 @@ type Contexto = {
   /** Executa a decisão de um comando. Devolve a mensagem de erro, ou null se gravou. */
   executar: (d: Decisao<{ type: string; payload: unknown }>) => Promise<string | null>;
   sincronizar: () => Promise<void>;
+  /** LGPD: apaga o banco local e recomeça com um vazio. */
+  apagarDadosLocais: () => Promise<void>;
 };
 
 const Ctx = createContext<Contexto | null>(null);
@@ -135,11 +137,23 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [recarregar, sincronizar],
   );
 
+  const apagarDadosLocais = useCallback(async () => {
+    const n = nucleo.current;
+    if (!n) return;
+    nucleo.current = null;
+    await n.store.apagarBanco();
+    nucleo.current = await iniciarNucleo();
+    setCatalogoGlobal(null);
+    await recarregar();
+    const novo = await atualizarCatalogo(nucleo.current.store, null);
+    if (novo) setCatalogoGlobal(novo);
+  }, [recarregar]);
+
   const catalogo = useMemo(() => montarCatalogo(catalogoGlobal, estado.catalogo), [catalogoGlobal, estado.catalogo]);
 
   const valor = useMemo<Contexto>(
-    () => ({ pronto, estado, catalogo, sync, deviceId: nucleo.current?.store.deviceId ?? '', logado, executar, sincronizar }),
-    [pronto, estado, catalogo, sync, logado, executar, sincronizar],
+    () => ({ pronto, estado, catalogo, sync, deviceId: nucleo.current?.store.deviceId ?? '', logado, executar, sincronizar, apagarDadosLocais }),
+    [pronto, estado, catalogo, sync, logado, executar, sincronizar, apagarDadosLocais],
   );
   if (erroFatal) {
     return (
