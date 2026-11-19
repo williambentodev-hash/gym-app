@@ -45,3 +45,4 @@ docs/
 | [0008](docs/adr/0008-autenticacao.md) | Autenticação: Better Auth no Worker + login Google | Aceito |
 | [0009](docs/adr/0009-estrutura-do-monorepo.md) | Monorepo pnpm + Turborepo, fronteiras verificadas com dependency-cruiser | Aceito |
 | [0010](docs/adr/0010-midias-do-catalogo-como-assets-estaticos.md) | Mídias do catálogo como Static Assets + download explícito para offline | Aceito |
+| [0011](docs/adr/0011-fonte-do-conteudo-do-catalogo.md) | Fonte do catálogo: ExerciseGymGifsDB, uso pessoal, referenciado (não redistribuído) | Aceito |
