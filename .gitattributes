@@ -1,0 +1,10 @@
+# Normaliza finais de linha: LF no repositório, independente do SO
+* text=auto eol=lf
+
+# Binários
+*.png binary
+*.jpg binary
+*.webp binary
+*.mp4 binary
+*.apk binary
+*.ttf binary

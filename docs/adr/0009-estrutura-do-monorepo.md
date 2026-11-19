@@ -1,6 +1,6 @@
 # ADR-0009: Monorepo com pnpm + Turborepo e fronteiras verificadas automaticamente
 
-- **Status:** Proposto
+- **Status:** Aceito
 - **Data:** 2026-11-18
 - **Fase:** 2
 - **Relacionado:** [ADR-0004](0004-typescript-como-linguagem-do-backend.md), [ADR-0006](0006-estrategia-de-sincronizacao-offline.md), [ADR-0007](0007-frontend-expo-universal.md)
@@ -20,7 +20,7 @@
 | Orquestração de tarefas | Nenhuma · **Turborepo** · Nx | Turborepo: cache de build/teste com configuração mínima. O Nx é mais poderoso, mas muito mais pesado para uma pessoa |
 | Verificação de fronteiras | Convenção · `eslint-plugin-boundaries` · **dependency-cruiser** | dependency-cruiser: regras declarativas, roda na CI e **gera o grafo de dependências**, que serve como documentação viva |
 
-## Decisão (proposta)
+## Decisão
 
 ### Estrutura
 
