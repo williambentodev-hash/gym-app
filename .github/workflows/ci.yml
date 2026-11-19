@@ -32,3 +32,6 @@ jobs:
 
       - name: Fitness functions de arquitetura (ADR-0009)
         run: pnpm lint:arch
+
+      - name: Testes
+        run: pnpm test

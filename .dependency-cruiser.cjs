@@ -12,7 +12,7 @@ module.exports = {
         'packages/domain não importa nada além de si mesmo e de zod: nem React, nem Expo, nem cloudflare:*, ' +
         'nem módulos do Node, nem outros pacotes do repo. Precisa rodar no celular offline, no Worker e nos testes.',
       severity: 'error',
-      from: { path: '^packages/domain/' },
+      from: { path: '^packages/domain/', pathNot: '\\.test\\.ts$' }, // testes podem importar o vitest
       to: { pathNot: ['^packages/domain/', 'node_modules/zod/'] },
     },
     {
