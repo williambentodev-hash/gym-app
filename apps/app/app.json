@@ -1,7 +1,9 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "gym.app",
+    "slug": "gym-app",
+    "owner": "williambento",
+    "scheme": "gymapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,6 +12,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.williambento.gymapp",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -23,6 +26,11 @@
     },
     "plugins": [
       "expo-sqlite"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "3f9bbd67-c11f-4826-99e0-24952ae616a8"
+      }
+    }
   }
 }
