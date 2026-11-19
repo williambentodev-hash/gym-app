@@ -17,7 +17,7 @@ docs/
 | 0 | Descoberta: visão, requisitos, atributos de qualidade | ✅ [visão](docs/architecture/00-visao-do-produto.md) |
 | 1 | Domínio: bounded contexts, event storming | ✅ [domínio](docs/architecture/01-dominio.md) |
 | 2 | Visão arquitetural: estilo, C4, ADRs | ✅ [visão arquitetural](docs/architecture/02-visao-arquitetural.md) |
-| 3 | Spike técnico + walking skeleton: repo, CI/CD, IaC | 🟡 em andamento |
+| 3 | Spike técnico + walking skeleton: repo, CI/CD, IaC | 🟡 spike ✅ ([resultados](docs/architecture/03-spike.md)) · walking skeleton ⏳ |
 | 4 | Modelagem: DDD tático, dados, APIs | ⚪ |
 | 5 | Segurança e LGPD | ⚪ |
 | 6 | Features incrementais | ⚪ |
