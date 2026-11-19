@@ -87,10 +87,13 @@ jobs:
 
       - name: Smoke test pós-deploy
         if: env.CLOUDFLARE_API_TOKEN != ''
+        # A nova versão leva alguns segundos para propagar na borda: cada verificação tenta por até ~1 min.
         run: |
-          curl -fsS https://gym-api.gym-api.workers.dev/api/health
-          test "$(curl -s -o /dev/null -w '%{http_code}' https://gym-api.gym-api.workers.dev/)" = "200"
-          test "$(curl -s -o /dev/null -w '%{http_code}' 'https://gym-api.gym-api.workers.dev/api/sync/pull?desde=0')" = "401"
-          test "$(curl -s -o /dev/null -w '%{http_code}' https://gym-api.gym-api.workers.dev/api/conta/exportar)" = "401"
-          curl -sI https://gym-api.gym-api.workers.dev/ | grep -qi '^x-content-type-options: nosniff'
-          curl -sI https://gym-api.gym-api.workers.dev/api/health | grep -qi '^x-content-type-options: nosniff'
+          B=https://gym-api.gym-api.workers.dev
+          tentar() { for i in $(seq 1 10); do if eval "$1"; then echo "✓ $2"; return 0; fi; sleep 6; done; echo "✗ $2"; return 1; }
+          tentar "curl -fsS $B/api/health > /dev/null" "health"
+          tentar "test \"\$(curl -s -o /dev/null -w '%{http_code}' $B/)\" = 200" "web 200"
+          tentar "test \"\$(curl -s -o /dev/null -w '%{http_code}' '$B/api/sync/pull?desde=0')\" = 401" "sync exige login"
+          tentar "test \"\$(curl -s -o /dev/null -w '%{http_code}' $B/api/conta/exportar)\" = 401" "exportação exige login"
+          tentar "curl -sI $B/ | grep -qi '^x-content-type-options: nosniff'" "cabeçalhos de segurança na web"
+          tentar "curl -sI $B/api/health | grep -qi '^x-content-type-options: nosniff'" "cabeçalhos de segurança na API"
