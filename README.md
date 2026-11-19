@@ -39,3 +39,5 @@ docs/
 | [0004](docs/adr/0004-typescript-como-linguagem-do-backend.md) | TypeScript no backend | Aceito |
 | [0005](docs/adr/0005-cloudflare-como-plataforma-de-nuvem.md) | Cloudflare como plataforma | Aceito |
 | [0006](docs/adr/0006-estrategia-de-sincronizacao-offline.md) | Sincronização local-first com log de eventos por usuário | Aceito |
+| [0007](docs/adr/0007-frontend-expo-universal.md) | Frontend universal com Expo (iOS, Android, web); distribuição sem lojas | Aceito |
+| [0008](docs/adr/0008-autenticacao.md) | Autenticação: Better Auth no Worker + login Google | Proposto |
