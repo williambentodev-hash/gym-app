@@ -1,4 +1,6 @@
-# CI (Fase 3 — walking skeleton): toda mudança passa por tipos e fitness functions de arquitetura.
+# CI/CD (Fase 3 — walking skeleton):
+#   verificar → toda mudança passa por tipos, fitness functions de arquitetura e testes.
+#   deploy    → só na main, só se verificar passou: migrações D1, build web e publicação do Worker.
 name: CI
 
 on:
@@ -8,7 +10,7 @@ on:
 
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false # não interromper um deploy no meio
 
 jobs:
   verificar:
@@ -35,3 +37,52 @@ jobs:
 
       - name: Testes
         run: pnpm test
+
+  deploy:
+    needs: verificar
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: producao
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+      CI: '1'
+    steps:
+      - name: Token configurado?
+        if: env.CLOUDFLARE_API_TOKEN == ''
+        run: echo "::warning::CLOUDFLARE_API_TOKEN não configurado — deploy ignorado."
+
+      - uses: actions/checkout@v5
+        if: env.CLOUDFLARE_API_TOKEN != ''
+
+      - uses: pnpm/action-setup@v4
+        if: env.CLOUDFLARE_API_TOKEN != ''
+
+      - uses: actions/setup-node@v5
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        with:
+          node-version: 26
+          cache: pnpm
+
+      - name: Instalar dependências
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        run: pnpm install --frozen-lockfile
+
+      # Migrações ANTES do código novo: o código precisa encontrar o schema que espera.
+      # Regra para migrações: sempre aditivas/compatíveis com a versão anterior do Worker (expand → contract).
+      - name: Migrações D1 (identidade)
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        working-directory: apps/api
+        run: pnpm exec wrangler d1 migrations apply gym-identity --remote
+
+      - name: Build web + deploy do Worker
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        run: pnpm run deploy
+
+      - name: Smoke test pós-deploy
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        run: |
+          curl -fsS https://gym-api.gym-api.workers.dev/api/health
+          test "$(curl -s -o /dev/null -w '%{http_code}' https://gym-api.gym-api.workers.dev/)" = "200"
+          test "$(curl -s -o /dev/null -w '%{http_code}' 'https://gym-api.gym-api.workers.dev/api/sync/pull?desde=0')" = "401"
