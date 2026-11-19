@@ -47,3 +47,4 @@ docs/
 | [0010](docs/adr/0010-midias-do-catalogo-como-assets-estaticos.md) | Mídias do catálogo como Static Assets + download explícito para offline | Aceito |
 | [0011](docs/adr/0011-fonte-do-conteudo-do-catalogo.md) | Fonte do catálogo: ExerciseGymGifsDB, uso pessoal, referenciado (não redistribuído) | Aceito |
 | [0012](docs/adr/0012-catalogo-de-eventos-v1.md) | Catálogo de eventos de domínio v1 (drop = série própria; época v1 do log) | Aceito |
+| [0013](docs/adr/0013-catalogo-curado-como-snapshot-estatico.md) | Catálogo curado (100 exercícios em PT) como snapshot estático versionado | Aceito |

@@ -1,0 +1,1472 @@
+{
+ "versao": "v1-f6d16e9-100",
+ "fonte": {
+  "repositorio": "JahelCuadrado/ExerciseGymGifsDB",
+  "commit": "f6d16e977fbee3c04295311c44cb8374ca8ff182"
+ },
+ "exercicios": [
+  {
+   "id": "abs/cable-kneeling-crunch",
+   "nome": "Abdominal na polia",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "abdomen",
+   "gruposSecundarios": [],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/cable-kneeling-crunch.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/cable-kneeling-crunch.thumb.webp"
+   }
+  },
+  {
+   "id": "abs/russian-twist",
+   "nome": "Abdominal russo (rotação)",
+   "modalidade": "peso_corporal",
+   "composto": false,
+   "grupoPrincipal": "abdomen",
+   "gruposSecundarios": [],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/russian-twist.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/russian-twist.thumb.webp"
+   }
+  },
+  {
+   "id": "abs/crunch-floor",
+   "nome": "Abdominal supra (crunch)",
+   "modalidade": "peso_corporal",
+   "composto": false,
+   "grupoPrincipal": "abdomen",
+   "gruposSecundarios": [],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/crunch-floor.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/crunch-floor.thumb.webp"
+   }
+  },
+  {
+   "id": "quads/dumbbell-single-leg-split-squat",
+   "nome": "Agachamento búlgaro com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "quadriceps",
+   "gruposSecundarios": [
+    "gluteos"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/quads/dumbbell-single-leg-split-squat.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/quads/dumbbell-single-leg-split-squat.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/barbell-front-squat",
+   "nome": "Agachamento frontal com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "quadriceps",
+   "gruposSecundarios": [
+    "gluteos"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-front-squat.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-front-squat.thumb.webp"
+   }
+  },
+  {
+   "id": "quads/dumbbell-goblet-squat",
+   "nome": "Agachamento goblet",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "quadriceps",
+   "gruposSecundarios": [
+    "gluteos"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/quads/dumbbell-goblet-squat.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/quads/dumbbell-goblet-squat.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/barbell-full-squat",
+   "nome": "Agachamento livre com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "quadriceps",
+   "gruposSecundarios": [
+    "gluteos",
+    "posteriores",
+    "lombar"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-full-squat.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-full-squat.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/smith-squat",
+   "nome": "Agachamento no Smith",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "quadriceps",
+   "gruposSecundarios": [
+    "gluteos"
+   ],
+   "equipamento": "smith",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/smith-squat.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/smith-squat.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/barbell-lunge",
+   "nome": "Avanço com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "quadriceps",
+   "gruposSecundarios": [
+    "gluteos"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-lunge.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-lunge.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/dumbbell-lunge",
+   "nome": "Avanço com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "quadriceps",
+   "gruposSecundarios": [
+    "gluteos"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/dumbbell-lunge.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/dumbbell-lunge.thumb.webp"
+   }
+  },
+  {
+   "id": "lats/assisted-pull-up",
+   "nome": "Barra fixa assistida",
+   "modalidade": "peso_corporal",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps"
+   ],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/assisted-pull-up.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/assisted-pull-up.thumb.webp"
+   }
+  },
+  {
+   "id": "lats/pull-up",
+   "nome": "Barra fixa pronada",
+   "modalidade": "peso_corporal",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps"
+   ],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/pull-up.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/pull-up.thumb.webp"
+   }
+  },
+  {
+   "id": "lats/chin-up",
+   "nome": "Barra fixa supinada",
+   "modalidade": "peso_corporal",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps"
+   ],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/chin-up.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/chin-up.thumb.webp"
+   }
+  },
+  {
+   "id": "cardio/stationary-bike-walk",
+   "nome": "Bicicleta ergométrica",
+   "modalidade": "cardio",
+   "composto": false,
+   "grupoPrincipal": "cardio",
+   "gruposSecundarios": [],
+   "equipamento": "cardio",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/cardio/stationary-bike-walk.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/cardio/stationary-bike-walk.thumb.webp"
+   }
+  },
+  {
+   "id": "hamstrings/barbell-good-morning",
+   "nome": "Bom-dia com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "posteriores",
+   "gruposSecundarios": [
+    "lombar",
+    "gluteos"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/hamstrings/barbell-good-morning.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/hamstrings/barbell-good-morning.thumb.webp"
+   }
+  },
+  {
+   "id": "cardio/burpee",
+   "nome": "Burpee",
+   "modalidade": "peso_corporal",
+   "composto": true,
+   "grupoPrincipal": "cardio",
+   "gruposSecundarios": [
+    "peito",
+    "quadriceps"
+   ],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/cardio/burpee.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/cardio/burpee.thumb.webp"
+   }
+  },
+  {
+   "id": "abductors/lever-seated-hip-abduction",
+   "nome": "Cadeira abdutora",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "abdutores",
+   "gruposSecundarios": [
+    "gluteos"
+   ],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abductors/lever-seated-hip-abduction.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abductors/lever-seated-hip-abduction.thumb.webp"
+   }
+  },
+  {
+   "id": "adductors/lever-seated-hip-adduction",
+   "nome": "Cadeira adutora",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "adutores",
+   "gruposSecundarios": [],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/adductors/lever-seated-hip-adduction.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/adductors/lever-seated-hip-adduction.thumb.webp"
+   }
+  },
+  {
+   "id": "quads/lever-leg-extension",
+   "nome": "Cadeira extensora",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "quadriceps",
+   "gruposSecundarios": [],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/quads/lever-leg-extension.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/quads/lever-leg-extension.thumb.webp"
+   }
+  },
+  {
+   "id": "hamstrings/lever-seated-leg-curl",
+   "nome": "Cadeira flexora",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "posteriores",
+   "gruposSecundarios": [],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/hamstrings/lever-seated-leg-curl.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/hamstrings/lever-seated-leg-curl.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/cable-standing-fly",
+   "nome": "Crossover na polia",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "ombros"
+   ],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/cable-standing-fly.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/cable-standing-fly.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/dumbbell-incline-fly",
+   "nome": "Crucifixo inclinado com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "ombros"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/dumbbell-incline-fly.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/dumbbell-incline-fly.thumb.webp"
+   }
+  },
+  {
+   "id": "delts/dumbbell-reverse-fly",
+   "nome": "Crucifixo invertido com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "ombros",
+   "gruposSecundarios": [
+    "costas"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/dumbbell-reverse-fly.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/dumbbell-reverse-fly.thumb.webp"
+   }
+  },
+  {
+   "id": "delts/lever-seated-reverse-fly",
+   "nome": "Crucifixo invertido na máquina",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "ombros",
+   "gruposSecundarios": [
+    "costas"
+   ],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/lever-seated-reverse-fly.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/lever-seated-reverse-fly.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/dumbbell-fly",
+   "nome": "Crucifixo reto com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "ombros"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/dumbbell-fly.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/dumbbell-fly.thumb.webp"
+   }
+  },
+  {
+   "id": "delts/dumbbell-arnold-press",
+   "nome": "Desenvolvimento Arnold",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "ombros",
+   "gruposSecundarios": [
+    "triceps"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/dumbbell-arnold-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/dumbbell-arnold-press.thumb.webp"
+   }
+  },
+  {
+   "id": "delts/barbell-seated-overhead-press",
+   "nome": "Desenvolvimento com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "ombros",
+   "gruposSecundarios": [
+    "triceps"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/barbell-seated-overhead-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/barbell-seated-overhead-press.thumb.webp"
+   }
+  },
+  {
+   "id": "delts/dumbbell-seated-shoulder-press",
+   "nome": "Desenvolvimento com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "ombros",
+   "gruposSecundarios": [
+    "triceps"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/dumbbell-seated-shoulder-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/dumbbell-seated-shoulder-press.thumb.webp"
+   }
+  },
+  {
+   "id": "delts/lever-shoulder-press",
+   "nome": "Desenvolvimento na máquina",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "ombros",
+   "gruposSecundarios": [
+    "triceps"
+   ],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/lever-shoulder-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/lever-shoulder-press.thumb.webp"
+   }
+  },
+  {
+   "id": "abs/hanging-leg-raise",
+   "nome": "Elevação de pernas na barra",
+   "modalidade": "peso_corporal",
+   "composto": false,
+   "grupoPrincipal": "abdomen",
+   "gruposSecundarios": [],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/hanging-leg-raise.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/hanging-leg-raise.thumb.webp"
+   }
+  },
+  {
+   "id": "abs/lying-leg-raise-flat-bench",
+   "nome": "Elevação de pernas no banco",
+   "modalidade": "peso_corporal",
+   "composto": false,
+   "grupoPrincipal": "abdomen",
+   "gruposSecundarios": [],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/lying-leg-raise-flat-bench.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/lying-leg-raise-flat-bench.thumb.webp"
+   }
+  },
+  {
+   "id": "delts/dumbbell-front-raise",
+   "nome": "Elevação frontal com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "ombros",
+   "gruposSecundarios": [],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/dumbbell-front-raise.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/dumbbell-front-raise.thumb.webp"
+   }
+  },
+  {
+   "id": "delts/dumbbell-lateral-raise",
+   "nome": "Elevação lateral com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "ombros",
+   "gruposSecundarios": [],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/dumbbell-lateral-raise.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/dumbbell-lateral-raise.thumb.webp"
+   }
+  },
+  {
+   "id": "delts/cable-lateral-raise",
+   "nome": "Elevação lateral na polia",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "ombros",
+   "gruposSecundarios": [],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/cable-lateral-raise.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/cable-lateral-raise.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/barbell-glute-bridge-two-legs-on-bench-male",
+   "nome": "Elevação pélvica com barra (hip thrust)",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "gluteos",
+   "gruposSecundarios": [
+    "posteriores"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-glute-bridge-two-legs-on-bench-male.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-glute-bridge-two-legs-on-bench-male.thumb.webp"
+   }
+  },
+  {
+   "id": "cardio/walk-elliptical-cross-trainer",
+   "nome": "Elíptico",
+   "modalidade": "cardio",
+   "composto": false,
+   "grupoPrincipal": "cardio",
+   "gruposSecundarios": [],
+   "equipamento": "cardio",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/cardio/walk-elliptical-cross-trainer.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/cardio/walk-elliptical-cross-trainer.thumb.webp"
+   }
+  },
+  {
+   "id": "traps/barbell-shrug",
+   "nome": "Encolhimento com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "trapezio",
+   "gruposSecundarios": [],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/traps/barbell-shrug.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/traps/barbell-shrug.thumb.webp"
+   }
+  },
+  {
+   "id": "traps/dumbbell-shrug",
+   "nome": "Encolhimento com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "trapezio",
+   "gruposSecundarios": [],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/traps/dumbbell-shrug.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/traps/dumbbell-shrug.thumb.webp"
+   }
+  },
+  {
+   "id": "cardio/mountain-climber",
+   "nome": "Escalador",
+   "modalidade": "peso_corporal",
+   "composto": true,
+   "grupoPrincipal": "abdomen",
+   "gruposSecundarios": [
+    "ombros"
+   ],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/cardio/mountain-climber.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/cardio/mountain-climber.thumb.webp"
+   }
+  },
+  {
+   "id": "cardio/walking-on-incline-treadmill",
+   "nome": "Esteira",
+   "modalidade": "cardio",
+   "composto": false,
+   "grupoPrincipal": "cardio",
+   "gruposSecundarios": [],
+   "equipamento": "cardio",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/cardio/walking-on-incline-treadmill.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/cardio/walking-on-incline-treadmill.thumb.webp"
+   }
+  },
+  {
+   "id": "delts/cable-rear-delt-row-with-rope",
+   "nome": "Face pull na polia",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "ombros",
+   "gruposSecundarios": [
+    "costas",
+    "trapezio"
+   ],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/cable-rear-delt-row-with-rope.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/cable-rear-delt-row-with-rope.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/push-up",
+   "nome": "Flexão de braço",
+   "modalidade": "peso_corporal",
+   "composto": true,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "triceps",
+    "ombros"
+   ],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/push-up.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/push-up.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/cable-standing-hip-extension",
+   "nome": "Glúteo na polia (coice)",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "gluteos",
+   "gruposSecundarios": [
+    "posteriores"
+   ],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/cable-standing-hip-extension.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/cable-standing-hip-extension.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/sled-hack-squat",
+   "nome": "Hack squat",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "quadriceps",
+   "gruposSecundarios": [
+    "gluteos"
+   ],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/sled-hack-squat.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/sled-hack-squat.thumb.webp"
+   }
+  },
+  {
+   "id": "spine/hyperextension",
+   "nome": "Hiperextensão lombar (banco romano)",
+   "modalidade": "peso_corporal",
+   "composto": false,
+   "grupoPrincipal": "lombar",
+   "gruposSecundarios": [
+    "gluteos",
+    "posteriores"
+   ],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/spine/hyperextension.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/spine/hyperextension.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/kettlebell-swing",
+   "nome": "Kettlebell swing",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "gluteos",
+   "gruposSecundarios": [
+    "posteriores",
+    "lombar"
+   ],
+   "equipamento": "kettlebell",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/kettlebell-swing.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/kettlebell-swing.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/sled-45-leg-press",
+   "nome": "Leg press 45°",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "quadriceps",
+   "gruposSecundarios": [
+    "gluteos",
+    "posteriores"
+   ],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/sled-45-leg-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/sled-45-leg-press.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/barbell-deadlift",
+   "nome": "Levantamento terra",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "posteriores",
+   "gruposSecundarios": [
+    "gluteos",
+    "lombar",
+    "costas",
+    "trapezio"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-deadlift.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-deadlift.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/barbell-sumo-deadlift",
+   "nome": "Levantamento terra sumô",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "gluteos",
+   "gruposSecundarios": [
+    "quadriceps",
+    "posteriores",
+    "adutores",
+    "lombar"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-sumo-deadlift.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-sumo-deadlift.thumb.webp"
+   }
+  },
+  {
+   "id": "hamstrings/lever-lying-leg-curl",
+   "nome": "Mesa flexora",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "posteriores",
+   "gruposSecundarios": [],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/hamstrings/lever-lying-leg-curl.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/hamstrings/lever-lying-leg-curl.thumb.webp"
+   }
+  },
+  {
+   "id": "calves/lever-standing-calf-raise",
+   "nome": "Panturrilha em pé na máquina",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "panturrilhas",
+   "gruposSecundarios": [],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/calves/lever-standing-calf-raise.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/calves/lever-standing-calf-raise.thumb.webp"
+   }
+  },
+  {
+   "id": "calves/sled-calf-press-on-leg-press",
+   "nome": "Panturrilha no leg press",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "panturrilhas",
+   "gruposSecundarios": [],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/calves/sled-calf-press-on-leg-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/calves/sled-calf-press-on-leg-press.thumb.webp"
+   }
+  },
+  {
+   "id": "calves/lever-seated-calf-raise",
+   "nome": "Panturrilha sentado na máquina",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "panturrilhas",
+   "gruposSecundarios": [],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/calves/lever-seated-calf-raise.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/calves/lever-seated-calf-raise.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/chest-dip",
+   "nome": "Paralelas (ênfase no peito)",
+   "modalidade": "peso_corporal",
+   "composto": true,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "triceps",
+    "ombros"
+   ],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/chest-dip.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/chest-dip.thumb.webp"
+   }
+  },
+  {
+   "id": "triceps/triceps-dip",
+   "nome": "Paralelas (ênfase no tríceps)",
+   "modalidade": "peso_corporal",
+   "composto": true,
+   "grupoPrincipal": "triceps",
+   "gruposSecundarios": [
+    "peito",
+    "ombros"
+   ],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/triceps-dip.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/triceps-dip.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/low-glute-bridge-on-floor",
+   "nome": "Ponte de glúteo",
+   "modalidade": "peso_corporal",
+   "composto": false,
+   "grupoPrincipal": "gluteos",
+   "gruposSecundarios": [
+    "posteriores"
+   ],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/low-glute-bridge-on-floor.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/low-glute-bridge-on-floor.thumb.webp"
+   }
+  },
+  {
+   "id": "abs/weighted-front-plank",
+   "nome": "Prancha",
+   "modalidade": "tempo",
+   "composto": false,
+   "grupoPrincipal": "abdomen",
+   "gruposSecundarios": [],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/weighted-front-plank.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/weighted-front-plank.thumb.webp"
+   }
+  },
+  {
+   "id": "abs/side-bridge-v-2",
+   "nome": "Prancha lateral",
+   "modalidade": "tempo",
+   "composto": false,
+   "grupoPrincipal": "abdomen",
+   "gruposSecundarios": [],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/side-bridge-v-2.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/side-bridge-v-2.thumb.webp"
+   }
+  },
+  {
+   "id": "cardio/jump-rope",
+   "nome": "Pular corda",
+   "modalidade": "cardio",
+   "composto": false,
+   "grupoPrincipal": "cardio",
+   "gruposSecundarios": [
+    "panturrilhas"
+   ],
+   "equipamento": "cardio",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/cardio/jump-rope.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/cardio/jump-rope.thumb.webp"
+   }
+  },
+  {
+   "id": "lats/cable-straight-arm-pulldown",
+   "nome": "Pulldown com braços estendidos",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/cable-straight-arm-pulldown.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/cable-straight-arm-pulldown.thumb.webp"
+   }
+  },
+  {
+   "id": "lats/barbell-pullover",
+   "nome": "Pullover com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "peito"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/barbell-pullover.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/barbell-pullover.thumb.webp"
+   }
+  },
+  {
+   "id": "lats/cable-lateral-pulldown-with-v-bar",
+   "nome": "Puxada com triângulo",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps"
+   ],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/cable-lateral-pulldown-with-v-bar.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/cable-lateral-pulldown-with-v-bar.thumb.webp"
+   }
+  },
+  {
+   "id": "lats/cable-lat-pulldown-full-range-of-motion",
+   "nome": "Puxada frontal na polia",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps"
+   ],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/cable-lat-pulldown-full-range-of-motion.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/cable-lat-pulldown-full-range-of-motion.thumb.webp"
+   }
+  },
+  {
+   "id": "lats/reverse-grip-machine-lat-pulldown",
+   "nome": "Puxada supinada na máquina",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps"
+   ],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/reverse-grip-machine-lat-pulldown.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/lats/reverse-grip-machine-lat-pulldown.thumb.webp"
+   }
+  },
+  {
+   "id": "delts/barbell-upright-row",
+   "nome": "Remada alta com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "ombros",
+   "gruposSecundarios": [
+    "trapezio"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/barbell-upright-row.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/delts/barbell-upright-row.thumb.webp"
+   }
+  },
+  {
+   "id": "upper-back/cable-seated-row",
+   "nome": "Remada baixa na polia",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps"
+   ],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/cable-seated-row.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/cable-seated-row.thumb.webp"
+   }
+  },
+  {
+   "id": "upper-back/lever-t-bar-row",
+   "nome": "Remada cavalinho (T-bar)",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps",
+    "lombar"
+   ],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/lever-t-bar-row.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/lever-t-bar-row.thumb.webp"
+   }
+  },
+  {
+   "id": "upper-back/barbell-bent-over-row",
+   "nome": "Remada curvada com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps",
+    "lombar"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/barbell-bent-over-row.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/barbell-bent-over-row.thumb.webp"
+   }
+  },
+  {
+   "id": "upper-back/inverted-row",
+   "nome": "Remada invertida",
+   "modalidade": "peso_corporal",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps"
+   ],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/inverted-row.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/inverted-row.thumb.webp"
+   }
+  },
+  {
+   "id": "upper-back/barbell-pendlay-row",
+   "nome": "Remada Pendlay",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps",
+    "lombar"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/barbell-pendlay-row.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/barbell-pendlay-row.thumb.webp"
+   }
+  },
+  {
+   "id": "upper-back/lever-seated-row",
+   "nome": "Remada sentada na máquina",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps"
+   ],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/lever-seated-row.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/lever-seated-row.thumb.webp"
+   }
+  },
+  {
+   "id": "upper-back/dumbbell-one-arm-bent-over-row",
+   "nome": "Remada unilateral com halter (serrote)",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "costas",
+   "gruposSecundarios": [
+    "biceps"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/dumbbell-one-arm-bent-over-row.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/upper-back/dumbbell-one-arm-bent-over-row.thumb.webp"
+   }
+  },
+  {
+   "id": "abs/wheel-rollerout",
+   "nome": "Roda abdominal",
+   "modalidade": "peso_corporal",
+   "composto": false,
+   "grupoPrincipal": "abdomen",
+   "gruposSecundarios": [],
+   "equipamento": "peso_corporal",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/wheel-rollerout.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/abs/wheel-rollerout.thumb.webp"
+   }
+  },
+  {
+   "id": "biceps/dumbbell-alternate-biceps-curl",
+   "nome": "Rosca alternada com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "biceps",
+   "gruposSecundarios": [
+    "antebracos"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/dumbbell-alternate-biceps-curl.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/dumbbell-alternate-biceps-curl.thumb.webp"
+   }
+  },
+  {
+   "id": "biceps/dumbbell-concentration-curl",
+   "nome": "Rosca concentrada",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "biceps",
+   "gruposSecundarios": [],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/dumbbell-concentration-curl.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/dumbbell-concentration-curl.thumb.webp"
+   }
+  },
+  {
+   "id": "biceps/barbell-curl",
+   "nome": "Rosca direta com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "biceps",
+   "gruposSecundarios": [
+    "antebracos"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/barbell-curl.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/barbell-curl.thumb.webp"
+   }
+  },
+  {
+   "id": "biceps/ez-barbell-curl",
+   "nome": "Rosca direta com barra W",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "biceps",
+   "gruposSecundarios": [
+    "antebracos"
+   ],
+   "equipamento": "barra_w",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/ez-barbell-curl.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/ez-barbell-curl.thumb.webp"
+   }
+  },
+  {
+   "id": "biceps/dumbbell-incline-curl",
+   "nome": "Rosca inclinada com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "biceps",
+   "gruposSecundarios": [],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/dumbbell-incline-curl.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/dumbbell-incline-curl.thumb.webp"
+   }
+  },
+  {
+   "id": "biceps/barbell-reverse-curl",
+   "nome": "Rosca inversa com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "antebracos",
+   "gruposSecundarios": [
+    "biceps"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/barbell-reverse-curl.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/barbell-reverse-curl.thumb.webp"
+   }
+  },
+  {
+   "id": "biceps/dumbbell-hammer-curl",
+   "nome": "Rosca martelo",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "biceps",
+   "gruposSecundarios": [
+    "antebracos"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/dumbbell-hammer-curl.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/dumbbell-hammer-curl.thumb.webp"
+   }
+  },
+  {
+   "id": "biceps/cable-curl",
+   "nome": "Rosca na polia",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "biceps",
+   "gruposSecundarios": [
+    "antebracos"
+   ],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/cable-curl.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/cable-curl.thumb.webp"
+   }
+  },
+  {
+   "id": "biceps/barbell-preacher-curl",
+   "nome": "Rosca Scott com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "biceps",
+   "gruposSecundarios": [],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/barbell-preacher-curl.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/biceps/barbell-preacher-curl.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/barbell-romanian-deadlift",
+   "nome": "Stiff com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "posteriores",
+   "gruposSecundarios": [
+    "gluteos",
+    "lombar"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-romanian-deadlift.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/barbell-romanian-deadlift.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/dumbbell-romanian-deadlift",
+   "nome": "Stiff com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "posteriores",
+   "gruposSecundarios": [
+    "gluteos",
+    "lombar"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/dumbbell-romanian-deadlift.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/dumbbell-romanian-deadlift.thumb.webp"
+   }
+  },
+  {
+   "id": "glutes/dumbbell-step-up",
+   "nome": "Subida no banco com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "quadriceps",
+   "gruposSecundarios": [
+    "gluteos"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/dumbbell-step-up.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/glutes/dumbbell-step-up.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/barbell-decline-bench-press",
+   "nome": "Supino declinado com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "triceps"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/barbell-decline-bench-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/barbell-decline-bench-press.thumb.webp"
+   }
+  },
+  {
+   "id": "triceps/barbell-close-grip-bench-press",
+   "nome": "Supino fechado",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "triceps",
+   "gruposSecundarios": [
+    "peito",
+    "ombros"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/barbell-close-grip-bench-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/barbell-close-grip-bench-press.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/barbell-incline-bench-press",
+   "nome": "Supino inclinado com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "ombros",
+    "triceps"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/barbell-incline-bench-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/barbell-incline-bench-press.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/dumbbell-incline-bench-press",
+   "nome": "Supino inclinado com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "ombros",
+    "triceps"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/dumbbell-incline-bench-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/dumbbell-incline-bench-press.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/lever-chest-press",
+   "nome": "Supino na máquina",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "triceps",
+    "ombros"
+   ],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/lever-chest-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/lever-chest-press.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/barbell-bench-press",
+   "nome": "Supino reto com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "triceps",
+    "ombros"
+   ],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/barbell-bench-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/barbell-bench-press.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/dumbbell-bench-press",
+   "nome": "Supino reto com halteres",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "triceps",
+    "ombros"
+   ],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/dumbbell-bench-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/dumbbell-bench-press.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/smith-bench-press",
+   "nome": "Supino reto no Smith",
+   "modalidade": "carga_repeticoes",
+   "composto": true,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "triceps",
+    "ombros"
+   ],
+   "equipamento": "smith",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/smith-bench-press.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/smith-bench-press.thumb.webp"
+   }
+  },
+  {
+   "id": "triceps/dumbbell-kickback",
+   "nome": "Tríceps coice com halter",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "triceps",
+   "gruposSecundarios": [],
+   "equipamento": "halteres",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/dumbbell-kickback.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/dumbbell-kickback.thumb.webp"
+   }
+  },
+  {
+   "id": "triceps/barbell-seated-overhead-triceps-extension",
+   "nome": "Tríceps francês com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "triceps",
+   "gruposSecundarios": [],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/barbell-seated-overhead-triceps-extension.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/barbell-seated-overhead-triceps-extension.thumb.webp"
+   }
+  },
+  {
+   "id": "triceps/cable-overhead-triceps-extension-rope-attachment",
+   "nome": "Tríceps francês na polia (corda)",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "triceps",
+   "gruposSecundarios": [],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/cable-overhead-triceps-extension-rope-attachment.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/cable-overhead-triceps-extension-rope-attachment.thumb.webp"
+   }
+  },
+  {
+   "id": "triceps/cable-pushdown-with-rope-attachment",
+   "nome": "Tríceps na corda",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "triceps",
+   "gruposSecundarios": [],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/cable-pushdown-with-rope-attachment.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/cable-pushdown-with-rope-attachment.thumb.webp"
+   }
+  },
+  {
+   "id": "triceps/cable-pushdown",
+   "nome": "Tríceps pulley (barra)",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "triceps",
+   "gruposSecundarios": [],
+   "equipamento": "polia",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/cable-pushdown.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/cable-pushdown.thumb.webp"
+   }
+  },
+  {
+   "id": "triceps/barbell-lying-triceps-extension-skull-crusher",
+   "nome": "Tríceps testa com barra",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "triceps",
+   "gruposSecundarios": [],
+   "equipamento": "barra",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/barbell-lying-triceps-extension-skull-crusher.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/triceps/barbell-lying-triceps-extension-skull-crusher.thumb.webp"
+   }
+  },
+  {
+   "id": "pectorals/lever-seated-fly",
+   "nome": "Voador (peck deck)",
+   "modalidade": "carga_repeticoes",
+   "composto": false,
+   "grupoPrincipal": "peito",
+   "gruposSecundarios": [
+    "ombros"
+   ],
+   "equipamento": "maquina",
+   "midia": {
+    "animacaoUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/lever-seated-fly.gif",
+    "miniaturaUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@f6d16e977fbee3c04295311c44cb8374ca8ff182/pectorals/lever-seated-fly.thumb.webp"
+   }
+  }
+ ]
+}

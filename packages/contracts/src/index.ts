@@ -43,6 +43,30 @@ export const PullQuery = z.object({
 });
 export type PullQuery = z.infer<typeof PullQuery>;
 
+// --- Catálogo global de exercícios (ADR-0011, ADR-0013): snapshot versionado, servido como arquivo estático ---
+
+export const ExercicioCatalogo = z.object({
+  /** ID estável (o mesmo da origem, ex.: "pectorals/barbell-bench-press"). Referenciado pelos eventos. */
+  id: z.string().min(1),
+  nome: z.string().min(1),
+  modalidade: z.enum(['carga_repeticoes', 'peso_corporal', 'tempo', 'cardio']),
+  /** Composto (multiarticular) ou isolado: define o incremento de carga e o descanso padrão da Orientação. */
+  composto: z.boolean(),
+  grupoPrincipal: z.string().min(1),
+  gruposSecundarios: z.array(z.string()),
+  equipamento: z.string().min(1),
+  /** Mídias REFERENCIADAS na origem (não redistribuídas: ADR-0011), fixadas num commit (URL imutável). */
+  midia: z.object({ animacaoUrl: z.url(), miniaturaUrl: z.url() }),
+});
+export type ExercicioCatalogo = z.infer<typeof ExercicioCatalogo>;
+
+export const Catalogo = z.object({
+  versao: z.string().min(1),
+  fonte: z.object({ repositorio: z.string(), commit: z.string() }),
+  exercicios: z.array(ExercicioCatalogo).min(1),
+});
+export type Catalogo = z.infer<typeof Catalogo>;
+
 export const PullResponse = z.object({
   eventos: z.array(EventoConfirmado),
   headSeq: z.number().int().nonnegative(),

@@ -1,4 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["src"]
+  "include": ["src"],
+  // Testes usam APIs do Node (ler o catálogo do disco). O pacote, não: ele roda também no React Native.
+  // Sem "types": ["node"] aqui, o compilador barra qualquer uso acidental de API do Node em produção.
+  "exclude": ["src/**/*.test.ts"]
 }

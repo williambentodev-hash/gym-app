@@ -8,3 +8,7 @@
 /media/*
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
+
+# Catálogo (ADR-0013): o app compara a "versao"; cache curto para propagar atualizações.
+/catalogo/*
+  Cache-Control: public, max-age=3600
