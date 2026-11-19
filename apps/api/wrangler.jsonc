@@ -15,6 +15,11 @@
   "vars": {
     "BETTER_AUTH_URL": "https://gym-api.gym-api.workers.dev"
   },
+  // Log de eventos por usuário (ADR-0006): 1 Durable Object por userId, com SQLite próprio.
+  "durable_objects": {
+    "bindings": [{ "name": "USER_STORE", "class_name": "UserStore" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["UserStore"] }],
   // Identidade (ADR-0008): usuários, contas OAuth e sessões. Dados de treino NÃO ficam aqui (ADR-0006).
   "d1_databases": [
     {
