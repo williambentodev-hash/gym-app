@@ -1,29 +1,113 @@
+// ⚠️ Tela de spike (Fase 3): valida S1 (SQLite local, inclusive web) e S4 (rebuild de 1.000 eventos < 1 s).
+import * as Crypto from 'expo-crypto';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { DOMAIN_SPIKE_OK, tonelagem } from '@gym/domain';
+import { useEffect, useState } from 'react';
+import { Button, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { estadoInicial, reduzir, type EstadoProgresso, type SerieRegistrada } from '@gym/domain';
+import { abrirLocalDb, type EventoArmazenado, type LocalDb } from './src/infra/local-db';
 
-// Spike S2: prova que o app consome o pacote de domínio do workspace.
-const volume = tonelagem([
-  { reps: 8, cargaKg: 40, tipo: 'aquecimento' },
-  { reps: 10, cargaKg: 60, tipo: 'trabalho' },
-  { reps: 9, cargaKg: 60, tipo: 'trabalho' },
-]);
+const EXERCICIOS = ['supino', 'agachamento', 'remada', 'desenvolvimento', 'terra', 'rosca', 'triceps', 'leg-press', 'barra', 'panturrilha'];
+
+function gerarEventos(qtd: number): EventoArmazenado[] {
+  return Array.from({ length: qtd }, (_, i) => {
+    const evento: SerieRegistrada = {
+      type: 'SerieRegistrada',
+      exercicioId: EXERCICIOS[i % EXERCICIOS.length]!,
+      reps: 6 + (i % 7),
+      cargaKg: 20 + (i % 40) * 2.5,
+      tipo: i % 5 === 0 ? 'aquecimento' : 'trabalho',
+    };
+    return { eventId: Crypto.randomUUID(), type: evento.type, payload: JSON.stringify(evento), pendente: true };
+  });
+}
 
 export default function App() {
+  const [db, setDb] = useState<LocalDb | null>(null);
+  const [total, setTotal] = useState(0);
+  const [log, setLog] = useState<string[]>([]);
+  const [estado, setEstado] = useState<EstadoProgresso>(estadoInicial);
+
+  const registrar = (linha: string) => setLog((l) => [`${new Date().toLocaleTimeString()}  ${linha}`, ...l]);
+
+  useEffect(() => {
+    abrirLocalDb()
+      .then(async (d) => {
+        setDb(d);
+        const n = await d.contar();
+        setTotal(n);
+        registrar(`Banco aberto (${Platform.OS}). Eventos persistidos: ${n}`);
+        // Modo automático para teste headless na web: ?auto
+        if (Platform.OS === 'web' && globalThis.location?.search.includes('auto')) {
+          await gravar1000(d);
+          const resumo = await reconstruir(d);
+          document.title = `SPIKE_RESULT antes=${n} ${resumo}`;
+        }
+      })
+      .catch((e) => {
+        registrar(`ERRO ao abrir o banco: ${String(e)}`);
+        if (Platform.OS === 'web') document.title = `SPIKE_RESULT ERRO ${String(e)}`;
+      });
+  }, []);
+
+  async function gravar1000(d: LocalDb | null = db) {
+    if (!d) return;
+    const db = d;
+    const t0 = performance.now();
+    await db.anexar(gerarEventos(1000));
+    const ms = performance.now() - t0;
+    const n = await db.contar();
+    setTotal(n);
+    registrar(`Gravou 1.000 eventos em ${ms.toFixed(0)} ms. Total: ${n}`);
+  }
+
+  async function reconstruir(d: LocalDb | null = db): Promise<string> {
+    if (!d) return '';
+    const db = d;
+    const t0 = performance.now();
+    const eventos = await db.lerTodos();
+    const t1 = performance.now();
+    const novo = eventos.reduce((s, e) => reduzir(s, JSON.parse(e.payload) as SerieRegistrada), estadoInicial);
+    const t2 = performance.now();
+    setEstado(novo);
+    const totalMs = t2 - t0;
+    const resumo = `depois=${eventos.length} rebuild_ms=${totalMs.toFixed(0)} leitura_ms=${(t1 - t0).toFixed(0)} reducao_ms=${(t2 - t1).toFixed(0)}`;
+    registrar(`Rebuild: ${resumo} ${totalMs < 1000 ? '✅' : '❌'}`);
+    return resumo;
+  }
+
+  async function limpar() {
+    if (!db) return;
+    await db.limpar();
+    setTotal(0);
+    setEstado(estadoInicial);
+    registrar('Banco limpo');
+  }
+
   return (
     <View style={styles.container}>
-      <Text>{DOMAIN_SPIKE_OK}</Text>
-      <Text>Tonelagem: {volume} kg (esperado: 1140)</Text>
+      <Text style={styles.titulo}>Spike S1 + S4 — {Platform.OS}</Text>
+      <Text>Eventos no SQLite local: {total}</Text>
+      <View style={styles.botoes}>
+        <Button title="Gravar 1.000" onPress={() => gravar1000()} disabled={!db} />
+        <Button title="Reconstruir" onPress={() => reconstruir()} disabled={!db} />
+        <Button title="Limpar" onPress={limpar} disabled={!db} color="#b00" />
+      </View>
+      <Text style={styles.sub}>Estado (supino): {JSON.stringify(estado['supino'] ?? {})}</Text>
+      <ScrollView style={styles.log}>
+        {log.map((l, i) => (
+          <Text key={i} style={styles.linha}>{l}</Text>
+        ))}
+      </ScrollView>
       <StatusBar style="auto" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  container: { flex: 1, backgroundColor: '#fff', padding: 24, paddingTop: 64, gap: 12 },
+  titulo: { fontSize: 20, fontWeight: '600' },
+  botoes: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
+  sub: { color: '#555' },
+  log: { flex: 1, borderTopWidth: 1, borderColor: '#ddd', paddingTop: 8 },
+  linha: { fontFamily: Platform.select({ web: 'monospace', default: undefined }), fontSize: 12, marginBottom: 4 },
 });

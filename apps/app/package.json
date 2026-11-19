@@ -5,6 +5,8 @@
   "dependencies": {
     "@gym/domain": "workspace:*",
     "expo": "~58.0.26",
+    "expo-crypto": "~58.0.8",
+    "expo-sqlite": "~58.0.18",
     "expo-status-bar": "~58.0.5",
     "react": "19.3.0",
     "react-dom": "19.3.0",
