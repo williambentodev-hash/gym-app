@@ -5,6 +5,39 @@ import { useEffect, useState } from 'react';
 import { Button, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { estadoInicial, reduzir, type EstadoProgresso, type SerieRegistrada } from '@gym/domain';
 import { abrirLocalDb, type EventoArmazenado, type LocalDb } from './src/infra/local-db';
+import { authClient, fetchAutenticado } from './src/infra/auth-client';
+
+// Spike S3: login Google + chamada a uma rota protegida.
+function PainelLogin() {
+  const { data: sessao, isPending } = authClient.useSession();
+  const [resposta, setResposta] = useState('');
+
+  async function testarApi() {
+    try {
+      const r = await fetchAutenticado('/api/me');
+      setResposta(`[${r.status}] ${await r.text()}`);
+    } catch (e) {
+      setResposta(`erro: ${String(e)}`);
+    }
+  }
+
+  return (
+    <View style={styles.painel}>
+      <Text style={styles.sub}>
+        S3 — {isPending ? 'verificando sessão…' : sessao ? `logado: ${sessao.user.name} (${sessao.user.email})` : 'não logado'}
+      </Text>
+      <View style={styles.botoes}>
+        {sessao ? (
+          <Button title="Sair" onPress={() => authClient.signOut()} color="#555" />
+        ) : (
+          <Button title="Entrar com Google" onPress={() => authClient.signIn.social({ provider: 'google', callbackURL: '/' })} />
+        )}
+        <Button title="Testar /api/me" onPress={testarApi} />
+      </View>
+      {resposta ? <Text style={styles.linha}>{resposta}</Text> : null}
+    </View>
+  );
+}
 
 const EXERCICIOS = ['supino', 'agachamento', 'remada', 'desenvolvimento', 'terra', 'rosca', 'triceps', 'leg-press', 'barra', 'panturrilha'];
 
@@ -86,7 +119,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Spike S1 + S4 — {Platform.OS}</Text>
+      <Text style={styles.titulo}>Spike — {Platform.OS}</Text>
+      <PainelLogin />
       <Text>Eventos no SQLite local: {total}</Text>
       <View style={styles.botoes}>
         <Button title="Gravar 1.000" onPress={() => gravar1000()} disabled={!db} />
@@ -109,6 +143,7 @@ const styles = StyleSheet.create({
   titulo: { fontSize: 20, fontWeight: '600' },
   botoes: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
   sub: { color: '#555' },
+  painel: { gap: 8, paddingBottom: 12, borderBottomWidth: 1, borderColor: '#ddd' },
   log: { flex: 1, borderTopWidth: 1, borderColor: '#ddd', paddingTop: 8 },
   linha: { fontFamily: Platform.select({ web: 'monospace', default: undefined }), fontSize: 12, marginBottom: 4 },
 });
