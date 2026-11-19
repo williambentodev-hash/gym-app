@@ -41,6 +41,27 @@ Observação: a partir do Node 25 o `corepack` não vem mais junto; o pnpm foi i
 
 **Código do spike:** foi incorporado à `main` como ponto de partida do walking skeleton. Os arquivos marcados com `⚠️ Código de spike` (tela `App.tsx`, reducer de teste no domínio) **serão substituídos**, não evoluídos. Já a infraestrutura (monorepo, Metro, EAS, Worker, D1, migrations, Better Auth, fitness functions) permanece.
 
+## Walking skeleton (2026-11-18): concluído
+
+O primeiro fluxo real de ponta a ponta, com todas as camadas da arquitetura de produção:
+
+```
+App (Android/web) ──registrar──▶ SQLite local (pendente) ──push──▶ Worker ──▶ UserStore (DO do usuário)
+        ▲                                                                         │
+        └──────────── estado = reduce(confirmados por seq + pendentes) ◀──pull────┘
+```
+
+| Peça | Implementação |
+|---|---|
+| Contratos | `@gym/contracts`: envelope, push/pull (zod) |
+| Motor | `@gym/sync`: genérico, 54 testes (propriedade de convergência + mutação) |
+| Cliente | `SyncStore` sobre expo-sqlite (mesmo código no Android e na web); `Transporte` HTTP validado |
+| Servidor | `UserStore` (Durable Object + SQLite), rotas autenticadas e validadas na borda |
+| Web | servida pelo próprio Worker (mesma origem); SPA fallback; COOP/COEP |
+| CI/CD | GitHub Actions: tipos → fitness functions → testes → migrações D1 → deploy → smoke test. Token Cloudflare com privilégio mínimo (Workers Scripts + D1), ambiente `producao` |
+
+**Validação manual (dono do produto):** séries registradas na web apareceram no celular; séries registradas **em modo avião** ficaram pendentes e, ao sincronizar, apareceram na web, com o mesmo progresso nos dois aparelhos.
+
 ## Fitness functions de arquitetura (ADR-0009): ativas
 
 `pnpm lint:arch` (dependency-cruiser 18) aplica as regras R1, R2, R3, R4, R5, R7 e "sem ciclos" do ADR-0009. A R6 (Orientação sem estado) não é verificável por grafo de dependências e fica para revisão de código e testes.
