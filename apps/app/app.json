@@ -7,14 +7,15 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#121214",
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "package": "com.williambento.gymapp",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#121214",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -22,13 +23,16 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "output": "single",
+      "backgroundColor": "#121214"
     },
     "plugins": [
       "expo-sqlite",
       "expo-web-browser",
       "expo-secure-store",
-      "expo-image"
+      "expo-image",
+      "expo-router"
     ],
     "extra": {
       "eas": {

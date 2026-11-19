@@ -18,8 +18,8 @@ docs/
 | 1 | Domínio: bounded contexts, event storming | ✅ [domínio](docs/architecture/01-dominio.md) |
 | 2 | Visão arquitetural: estilo, C4, ADRs | ✅ [visão arquitetural](docs/architecture/02-visao-arquitetural.md) |
 | 3 | Spike técnico + walking skeleton: repo, CI/CD, IaC | ✅ [spike + walking skeleton](docs/architecture/03-spike.md) |
-| 4 | Modelagem: DDD tático, dados, APIs | 🟡 [modelo de eventos](docs/architecture/04-modelo-de-eventos.md) |
-| 5 | Segurança e LGPD | ⚪ |
+| 4 | Modelagem: DDD tático, dados, APIs + telas | ✅ [eventos](docs/architecture/04-modelo-de-eventos.md) · [interface](docs/architecture/05-interface.md) |
+| 5 | Segurança e LGPD | ⚪ próxima |
 | 6 | Features incrementais | ⚪ |
 | 7 | Operação: observabilidade, SLOs, resiliência | ⚪ |
 | 8 | Evolução: eventos, extração de serviços, offline, integrações, IA | ⚪ |

@@ -42,10 +42,37 @@ const paraEvento = (l: Linha): EventoLocal => ({
 export type SyncStoreSqlite = SyncStore & {
   deviceId: string;
   contagens(): Promise<{ pendentes: number; confirmados: number }>;
+  /** Chave-valor local (ex.: cache do catálogo). */
+  meta: { ler(chave: string): Promise<string | undefined>; gravar(chave: string, valor: string): Promise<void> };
 };
 
-export async function abrirSyncStore(nome = 'gym.db'): Promise<SyncStoreSqlite> {
-  const db = await SQLite.openDatabaseAsync(nome);
+/**
+ * Na web, o SQLite usa OPFS com acesso EXCLUSIVO ao arquivo. Ao recarregar a página, o worker anterior pode
+ * ainda não ter liberado o arquivo ("Access Handles cannot be created…"). Tenta de novo com espera crescente.
+ * (Achado no E2E da Fase 4; o spike S1 não pegou porque abria um navegador novo a cada execução.)
+ */
+async function abrirComRetentativa(nome: string): Promise<SQLite.SQLiteDatabase> {
+  let ultimoErro: unknown;
+  for (let tentativa = 0; tentativa < 8; tentativa++) {
+    try {
+      return await SQLite.openDatabaseAsync(nome);
+    } catch (e) {
+      ultimoErro = e;
+      if (!/access handle|lock|busy/i.test(String(e))) throw e;
+      await new Promise((r) => setTimeout(r, 150 * 2 ** tentativa)); // 150 ms … ~19 s no total
+    }
+  }
+  throw new ErroBancoOcupado(String(ultimoErro));
+}
+
+export class ErroBancoOcupado extends Error {
+  constructor(detalhe: string) {
+    super(`O banco local está em uso por outra aba ou janela do app. Feche-a e recarregue esta página. (${detalhe})`);
+  }
+}
+
+export async function abrirSyncStore(nome: string): Promise<SyncStoreSqlite> {
+  const db = await abrirComRetentativa(nome);
   await db.execAsync(MIGRACOES);
 
   const lerMeta = async (chave: string) =>
@@ -62,6 +89,12 @@ export async function abrirSyncStore(nome = 'gym.db'): Promise<SyncStoreSqlite> 
 
   return {
     deviceId,
+    meta: {
+      ler: lerMeta,
+      gravar: async (chave, valor) => {
+        await gravarMeta(chave, valor);
+      },
+    },
 
     async anexarPendente(e: EventoEnvelope) {
       await db.runAsync(

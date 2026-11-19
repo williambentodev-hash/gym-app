@@ -39,5 +39,3 @@ export function reduzirDominio(estado: EstadoDominio, env: EnvelopeMinimo): Esta
   return execucao === estado.execucao ? estado : { ...estado, execucao };
 }
 
-// ⚠️ Legado do walking skeleton (época anterior ao ADR-0012): usado pelo app até a migração para o modelo v1.
-export { DOMAIN_SPIKE_OK, tonelagem, reduzir, estadoInicial, type EstadoProgresso, type SerieRegistrada } from './legado-spike';

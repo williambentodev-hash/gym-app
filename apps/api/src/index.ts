@@ -44,7 +44,8 @@ app.get('/api/sync/pull', async (c) => {
 });
 
 function userStore(env: AuthEnv, userId: string) {
-  return env.USER_STORE.get(env.USER_STORE.idFromName(userId));
+  // Época "v1" do log (ADR-0012): os eventos do walking skeleton ficam na época anterior (sem prefixo).
+  return env.USER_STORE.get(env.USER_STORE.idFromName(`v1:${userId}`));
 }
 
 export default app;

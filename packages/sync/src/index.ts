@@ -61,9 +61,10 @@ export function criarMotorSync<S>(opcoes: OpcoesMotor<S>) {
   let emAndamento: Promise<ResultadoSync> | null = null;
 
   /** Registra um fato do domínio. Sempre local e imediato: nunca espera a rede (QA-1). */
-  async function registrar(type: string, payload: unknown, schemaVersion = 1): Promise<EventoEnvelope> {
+  async function registrar(type: string, payload: unknown, schemaVersion = 1, opcoesEvento: { eventId?: string } = {}): Promise<EventoEnvelope> {
     const evento: EventoEnvelope = {
-      eventId: gerarId(),
+      // eventId explícito: eventos com ID determinístico (ADR-0006, regra 8). Duplicata = ignorada pelo store.
+      eventId: opcoesEvento.eventId ?? gerarId(),
       type,
       schemaVersion,
       payload,

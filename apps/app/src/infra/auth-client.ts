@@ -6,11 +6,9 @@ import { Platform } from 'react-native';
 
 const API_PRODUCAO = 'https://gym-api.gym-api.workers.dev';
 
-// Web servida pelo Worker: mesma origem (sem CORS, cookie do navegador). Em dev local (localhost), aponta para produção.
-export const API_URL =
-  Platform.OS === 'web' && typeof location !== 'undefined' && location.hostname !== 'localhost'
-    ? location.origin
-    : API_PRODUCAO;
+// Web: sempre a própria origem (o Worker serve web + API + catálogo; sem CORS, cookie do navegador).
+// Também permite testar a build completa num servidor local que imite o Worker.
+export const API_URL = Platform.OS === 'web' && typeof location !== 'undefined' ? location.origin : API_PRODUCAO;
 
 // Nativo: sessão guardada no SecureStore e enviada como header Cookie manualmente.
 // Web: a web será servida pelo próprio Worker (mesma origem), então o cookie do navegador basta.

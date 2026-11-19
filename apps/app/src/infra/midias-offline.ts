@@ -19,7 +19,8 @@ export async function garantirMidia(url: string): Promise<MidiaLocal> {
   dir.create({ idempotent: true, intermediates: true });
 
   // O nome versionado (ex.: agachamento-livre.v1.gif) torna o arquivo imutável: existe = está correto.
-  const nome = url.split('/').pop()!;
+  // Pasta + arquivo (ex.: "pectorals__barbell-bench-press.gif"): o mesmo nome pode existir em grupos diferentes.
+  const nome = url.split('/').slice(-2).join('__');
   const destino = new File(dir, nome);
   if (destino.exists) return { uri: destino.uri, origem: 'arquivo-local' };
 
