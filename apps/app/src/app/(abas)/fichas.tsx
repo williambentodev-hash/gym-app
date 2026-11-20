@@ -2,12 +2,13 @@
 import { adicionarTreino, criarFicha } from '@gym/domain';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { View } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { Text, View } from 'react-native';
 import { encadear } from '../../aplicacao/consultas';
 import { useApp } from '../../aplicacao/contexto';
 import { novoId } from '../../aplicacao/motor';
 import { avisar, Botao, Campo, Cartao, Chip, Linha, Secao, Separador, Tela, Vazio } from '../../ui/componentes';
-import { espaco } from '../../ui/tema';
+import { cores, espaco, tipo } from '../../ui/tema';
 
 export default function Fichas() {
   const { estado, executar } = useApp();
@@ -39,6 +40,16 @@ export default function Fichas() {
 
   return (
     <Tela titulo="Fichas">
+      <Cartao destaque onPress={() => router.push('/ia')}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: espaco.m }}>
+          <Ionicons name="sparkles" size={24} color={cores.acento} />
+          <View style={{ flex: 1 }}>
+            <Text style={tipo.destaque}>Montar com IA</Text>
+            <Text style={tipo.nota}>Uma especialista em treino monta a ficha pelo seu objetivo. Você revisa antes de salvar.</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={18} color={cores.textoTerciario} />
+        </View>
+      </Cartao>
       <Cartao>
         <Campo value={nome} onChangeText={setNome} placeholder="Nome da ficha (ex.: Hipertrofia ABC)" returnKeyType="done" onSubmitEditing={criar} />
         <Botao titulo="Criar ficha" icone="add" onPress={criar} />

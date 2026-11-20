@@ -2,8 +2,9 @@
 import { Hono } from 'hono';
 import { createMiddleware } from 'hono/factory';
 import { secureHeaders } from 'hono/secure-headers';
-import { PullQuery, PushRequest } from '@gym/contracts';
+import { Catalogo, PerfilTreino, PullQuery, PushRequest } from '@gym/contracts';
 import { createAuth, type AuthEnv } from './auth';
+import { ErroIA, gerarProposta } from './ia/servico';
 
 export { UserStore } from './infra/user-store';
 
@@ -128,6 +129,28 @@ app.delete('/api/conta', async (c) => {
     c.env.DB.prepare('DELETE FROM user WHERE id = ?').bind(userId),
   ]);
   return c.json({ ok: true, eventosApagados: v1.apagados + anterior.apagados });
+});
+
+// --- IA especialista em treino (ADR-0015): só PROPÕE uma ficha; quem grava é o app, via comandos do domínio ---
+
+app.use('/api/ia/*', autenticar, limitar((e) => e.LIMITE_IA));
+
+app.post('/api/ia/sugerir-ficha', limitarTamanho, async (c) => {
+  if (!c.env.ANTHROPIC_API_KEY) return c.json({ erro: 'IA ainda não configurada no servidor' }, 503);
+  const perfil = PerfilTreino.safeParse(await c.req.json().catch(() => null));
+  if (!perfil.success) return c.json({ erro: 'perfil inválido', detalhes: perfil.error.issues.slice(0, 5) }, 400);
+
+  // O catálogo é um asset estático do próprio Worker (ADR-0013): a IA só pode escolher entre esses IDs.
+  const resp = await c.env.ASSETS.fetch(new Request(new URL('/catalogo/catalogo.v1.json', c.req.url)));
+  const catalogo = Catalogo.parse(await resp.json());
+
+  try {
+    return c.json(await gerarProposta(c.env.ANTHROPIC_API_KEY, perfil.data, catalogo));
+  } catch (e) {
+    if (e instanceof ErroIA) return c.json({ erro: e.message }, e.status);
+    console.error(JSON.stringify({ evento: 'ia_erro', erro: String(e) }));
+    return c.json({ erro: 'erro inesperado ao gerar a ficha' }, 500);
+  }
 });
 
 /** Época "v1" do log (ADR-0012); "anterior" = walking skeleton (sem prefixo). */

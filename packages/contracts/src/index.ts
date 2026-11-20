@@ -67,6 +67,61 @@ export const Catalogo = z.object({
 });
 export type Catalogo = z.infer<typeof Catalogo>;
 
+// --- IA especialista em treino (ADR-0015): perfil enviado pelo app e proposta devolvida pela API ---
+
+/** Só parâmetros de treino: nada de nome, e-mail ou identificadores (minimização, ADR-0014/0015). */
+export const PerfilTreino = z.object({
+  objetivo: z.enum(['hipertrofia', 'forca', 'condicionamento', 'emagrecimento', 'saude']),
+  diasPorSemana: z.number().int().min(1).max(7),
+  minutosPorTreino: z.number().int().min(20).max(180),
+  nivel: z.enum(['iniciante', 'intermediario', 'avancado']),
+  local: z.enum(['academia_completa', 'academia_basica', 'casa_halteres', 'peso_corporal']),
+  /** Grupos musculares que a pessoa quer priorizar (chaves do catálogo, ex.: "gluteos"). */
+  prioridades: z.array(z.string().min(1).max(30)).max(5).default([]),
+  /** Texto livre opcional (ex.: "dor no ombro direito"). Pode ser dado de saúde: enviado só se preenchido. */
+  limitacoes: z.string().trim().max(300).optional(),
+  observacoes: z.string().trim().max(300).optional(),
+});
+export type PerfilTreino = z.infer<typeof PerfilTreino>;
+
+export const PrescricaoProposta = z.object({
+  series: z.number().int().min(1).max(10),
+  repeticoes: z.object({ min: z.number().int().min(1).max(50), max: z.number().int().min(1).max(50) }).optional(),
+  duracaoSeg: z.number().int().min(5).max(4 * 3600).optional(),
+  rir: z.number().int().min(0).max(5).optional(),
+  descansoSeg: z.number().int().min(0).max(600),
+  tecnica: z.enum(['normal', 'drop_set', 'rest_pause']),
+});
+export type PrescricaoProposta = z.infer<typeof PrescricaoProposta>;
+
+export const ItemProposto = z.object({
+  exercicioId: z.string().min(1),
+  nome: z.string(),
+  modalidade: z.enum(['carga_repeticoes', 'peso_corporal', 'tempo', 'cardio']),
+  prescricao: PrescricaoProposta,
+  observacao: z.string().optional(),
+});
+export type ItemProposto = z.infer<typeof ItemProposto>;
+
+export const PropostaFicha = z.object({
+  nome: z.string().min(1),
+  resumo: z.string(),
+  treinos: z.array(z.object({
+    nome: z.string().min(1),
+    foco: z.string(),
+    /** Bloco com 2+ itens = bi-set/circuito (mesmo conceito do domínio). */
+    blocos: z.array(z.object({ itens: z.array(ItemProposto).min(1) })).min(1),
+  })).min(1).max(7),
+  recomendacoes: z.array(z.string()),
+  /** Análise determinística da proposta pelas regras da Orientação (não é opinião da IA). */
+  analise: z.object({
+    volumeSemanal: z.record(z.string(), z.object({ series: z.number(), status: z.enum(['abaixo', 'dentro', 'acima']) })),
+    minutosEstimadosPorTreino: z.array(z.number()),
+    avisos: z.array(z.string()),
+  }),
+});
+export type PropostaFicha = z.infer<typeof PropostaFicha>;
+
 export const PullResponse = z.object({
   eventos: z.array(EventoConfirmado),
   headSeq: z.number().int().nonnegative(),

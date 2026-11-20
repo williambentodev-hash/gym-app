@@ -14,6 +14,38 @@ page.on('pageerror', (e) => erros.push(String(e)));
 page.on('console', (m) => { if (m.type() === 'error') erros.push('console: ' + m.text()); });
 page.on('dialog', (d) => d.accept()); // confirmações (window.confirm)
 
+// IA (ADR-0015): o E2E NÃO chama o modelo (custo e não determinismo). A rota é interceptada e devolve uma
+// proposta fixa; o teste cobre prévia + criação via comandos e confere o que o app ENVIARIA à IA.
+const CAMPOS_PERFIL = new Set(['objetivo', 'diasPorSemana', 'minutosPorTreino', 'nivel', 'local', 'prioridades', 'limitacoes', 'observacoes']);
+let perfilEnviado = null;
+const PROPOSTA_FIXA = {
+  nome: 'Hipertrofia — Superior/Inferior 4x',
+  resumo: 'Divisão superior/inferior repetida duas vezes por semana, com compostos primeiro.',
+  treinos: [
+    { nome: 'Treino A — Superior', foco: 'Peito, costas e ombros', blocos: [
+      { itens: [{ exercicioId: 'pectorals/barbell-bench-press', nome: 'Supino reto com barra', modalidade: 'carga_repeticoes', prescricao: { series: 3, repeticoes: { min: 6, max: 10 }, rir: 2, descansoSeg: 150, tecnica: 'normal' } }] },
+      { itens: [
+        { exercicioId: 'biceps/barbell-curl', nome: 'Rosca direta com barra', modalidade: 'carga_repeticoes', prescricao: { series: 3, repeticoes: { min: 10, max: 15 }, descansoSeg: 60, tecnica: 'normal' } },
+        { exercicioId: 'triceps/cable-pushdown', nome: 'Tríceps pulley (barra)', modalidade: 'carga_repeticoes', prescricao: { series: 3, repeticoes: { min: 10, max: 15 }, descansoSeg: 60, tecnica: 'normal' } },
+      ] },
+    ] },
+    { nome: 'Treino B — Inferior', foco: 'Pernas e core', blocos: [
+      { itens: [{ exercicioId: 'glutes/barbell-full-squat', nome: 'Agachamento livre com barra', modalidade: 'carga_repeticoes', prescricao: { series: 4, repeticoes: { min: 6, max: 10 }, descansoSeg: 180, tecnica: 'normal' } }] },
+      { itens: [{ exercicioId: 'abs/weighted-front-plank', nome: 'Prancha', modalidade: 'tempo', prescricao: { series: 3, duracaoSeg: 45, descansoSeg: 60, tecnica: 'normal' }, observacao: 'Mantenha a lombar neutra.' }] },
+    ] },
+  ],
+  recomendacoes: ['Suba a carga quando fizer o topo da faixa em todas as séries com RIR ≥ 1.'],
+  analise: { volumeSemanal: { peito: { series: 6, status: 'abaixo' }, quadriceps: { series: 8, status: 'abaixo' } }, minutosEstimadosPorTreino: [22, 25], avisos: [] },
+};
+await page.setRequestInterception(true);
+page.on('request', (req) => {
+  if (req.url().includes('/api/ia/sugerir-ficha')) {
+    perfilEnviado = JSON.parse(req.postData() ?? '{}');
+    return req.respond({ status: 200, contentType: 'application/json', body: JSON.stringify(PROPOSTA_FIXA) });
+  }
+  return req.continue();
+});
+
 const passo = async (nome, fn) => {
   try { await fn(); console.log('✓', nome); }
   catch (e) {
@@ -122,8 +154,26 @@ await passo('evolução do exercício a partir dos recordes', async () => {
   await page.screenshot({ path: process.argv[3] + '/evolucao.png' });
   await page.goBack();
 });
+await passo('IA: gera proposta a partir do perfil e mostra prévia com análise', async () => {
+  await aba('Fichas');
+  await clicar('Montar com IA');
+  await clicar('Gerar ficha com IA');
+  await ver('Proposta da especialista');
+  await ver('Volume semanal estimado');
+  await page.screenshot({ path: process.argv[3] + '/ia-proposta.png' });
+});
+await passo('IA: o pedido leva só parâmetros de treino (nada de nome/e-mail)', async () => {
+  const extras = Object.keys(perfilEnviado ?? {}).filter((k) => !CAMPOS_PERFIL.has(k));
+  if (!perfilEnviado || extras.length) throw new Error(`campos inesperados enviados à IA: ${extras.join(', ') || '(nenhum pedido)'}`);
+});
+await passo('IA: "Criar esta ficha" grava pelos comandos e abre o editor', async () => {
+  await clicar('Criar esta ficha');
+  await ver('Treino A — Superior');
+  await ver('Treino B — Inferior');
+  await ver('Bi-set');
+});
 await passo('dados persistem após recarregar', async () => {
-  await page.reload({ waitUntil: 'networkidle0' });
+  await page.goto(url, { waitUntil: 'networkidle0' }); // recarrega a partir da raiz (a URL atual pode ser um modal)
   await aba('Progresso');
   await ver('Treino A');
 });

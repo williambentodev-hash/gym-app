@@ -7,6 +7,8 @@ export type AuthEnv = Env & {
   BETTER_AUTH_SECRET: string;
   GOOGLE_CLIENT_ID: string;
   GOOGLE_CLIENT_SECRET: string;
+  /** IA especialista (ADR-0015). Opcional: sem ela, a rota responde 503 "IA não configurada". */
+  ANTHROPIC_API_KEY?: string;
 };
 
 /**
