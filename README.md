@@ -49,4 +49,5 @@ docs/
 | [0012](docs/adr/0012-catalogo-de-eventos-v1.md) | Catálogo de eventos de domínio v1 (drop = série própria; época v1 do log) | Aceito |
 | [0013](docs/adr/0013-catalogo-curado-como-snapshot-estatico.md) | Catálogo curado (100 exercícios em PT) como snapshot estático versionado | Aceito |
 | [0014](docs/adr/0014-seguranca-e-direitos-do-titular.md) | Segurança e direitos do titular (exportar, excluir, minimização, limites) | Aceito |
-| [0015](docs/adr/0015-ia-especialista-em-treino.md) | IA especialista em treino (Claude Opus 5.5): a IA propõe, o domínio decide | Aceito |
+| [0015](docs/adr/0015-ia-especialista-em-treino.md) | IA especialista em treino (Claude Opus 5.5): a IA propõe, o domínio decide | Aceito (provedor alterado pelo 0016) |
+| [0016](docs/adr/0016-ia-gratuita-workers-ai.md) | IA gratuita (Workers AI) com provedor por configuração, crítico determinístico e avaliação | Aceito |

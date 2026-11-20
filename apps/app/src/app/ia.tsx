@@ -48,7 +48,7 @@ export default function MontarComIA() {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: espaco.l }}>
           <ActivityIndicator size="large" color={cores.acento} />
           <Text style={tipo.destaque}>A especialista está montando sua ficha…</Text>
-          <Text style={[tipo.apoio, { textAlign: 'center' }]}>Ela pensa na divisão, no volume por grupo muscular e no tempo de cada treino. Pode levar até 1 minuto.</Text>
+          <Text style={[tipo.apoio, { textAlign: 'center' }]}>Ela pensa na divisão, no volume por grupo muscular e no tempo de cada treino, e uma revisão automática confere o resultado. Pode levar de 1 a 3 minutos: pode deixar esta tela aberta.</Text>
         </View>
       </Tela>
     );
@@ -95,7 +95,7 @@ export default function MontarComIA() {
       <Secao titulo="Limitações e observações (opcional)">
         <Campo value={perfil.limitacoes ?? ''} onChangeText={(t) => set({ limitacoes: t })} placeholder="Ex.: desconforto no ombro direito" maxLength={300} />
         <Campo value={perfil.observacoes ?? ''} onChangeText={(t) => set({ observacoes: t })} placeholder="Ex.: prefiro máquinas; treino de manhã" maxLength={300} />
-        <Text style={tipo.nota}>Enviamos só estes dados de treino para a IA (Anthropic), sem nome nem e-mail. Não inclua informações que identifiquem você. A IA não substitui orientação de um profissional de saúde.</Text>
+        <Text style={tipo.nota}>Enviamos só estes dados de treino para a IA (Workers AI, da Cloudflare), sem nome nem e-mail. Não inclua informações que identifiquem você. A IA não substitui orientação de um profissional de saúde.</Text>
       </Secao>
 
       <Botao titulo="Gerar ficha com IA" icone="sparkles" onPress={gerar} />

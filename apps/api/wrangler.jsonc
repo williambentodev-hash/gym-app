@@ -18,6 +18,8 @@
   "vars": {
     "BETTER_AUTH_URL": "https://gym-api.gym-api.workers.dev"
   },
+  // IA gratuita (ADR-0016): Workers AI, franquia diária do plano gratuito.
+  "ai": { "binding": "AI" },
   // Log de eventos por usuário (ADR-0006): 1 Durable Object por userId, com SQLite próprio.
   "durable_objects": {
     "bindings": [{ "name": "USER_STORE", "class_name": "UserStore" }]

@@ -14,7 +14,7 @@
 | Exercícios personalizados | Pessoal | Idem | Até excluir a conta |
 | `deviceId` (aleatório) | Técnico | Aparelho + nos eventos | Junto com os eventos |
 | Catálogo de exercícios | Público, não pessoal | Asset estático | — |
-| Perfil de treino enviado à IA (ADR-0015) | Pessoal; limitações podem ser **saúde** | Trânsito para a Anthropic (operadora); **não guardado** pelo app | Só durante a requisição |
+| Perfil de treino enviado à IA (ADR-0015) | Pessoal; limitações podem ser **saúde** | Trânsito para o Workers AI (Cloudflare, já operadora) ou, se configurado, para a Anthropic; **não guardado** pelo app | Só durante a requisição |
 
 **Sobre "saúde":** carga e repetições não são, por si, dado de saúde, mas, com histórico, permitem inferências sobre condição física. **Tratamos como sensível** (art. 11) por precaução, e a arquitetura já favorece isso: isolamento por usuário, sem terceiros e com eliminação total.
 
