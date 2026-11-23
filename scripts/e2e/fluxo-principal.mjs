@@ -173,6 +173,11 @@ await passo('IA: "Criar esta ficha" grava pelos comandos e abre o editor', async
   await ver('Bi-set');
 });
 await passo('dados persistem após recarregar', async () => {
+  // O SQLite da web usa OPFS com acesso exclusivo, e o passo anterior acabou de gravar uma ficha inteira.
+  // Recarregar com gravações em curso deixava a página nova presa esperando o arquivo (visto só na CI, Linux).
+  // Espera a página assentar e passa por about:blank para a página antiga e o worker dela serem descartados.
+  await page.waitForNetworkIdle({ idleTime: 500, timeout: 10_000 }).catch(() => undefined);
+  await page.goto('about:blank');
   await page.goto(url, { waitUntil: 'networkidle0' }); // recarrega a partir da raiz (a URL atual pode ser um modal)
   await aba('Progresso');
   await ver('Treino A');
