@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="luz" cx="0.5" cy="0.32" r="0.75">
+      <stop offset="0" stop-color="#1C1C1F"/>
+      <stop offset="1" stop-color="#121214"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#luz)"/>
+  <defs>
+    <linearGradient id="laranja" gradientUnits="userSpaceOnUse" x1="0" y1="146" x2="0" y2="880">
+      <stop offset="0" stop-color="#FF9A4D"/>
+      <stop offset="0.55" stop-color="#FF7A1A"/>
+      <stop offset="1" stop-color="#E8650A"/>
+    </linearGradient>
+  </defs>
+  <defs>
+    <clipPath id="base-i"><rect x="0" y="0" width="1000" height="880"/></clipPath>
+    <mask id="seta-i" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000">
+      <rect width="1000" height="1000" fill="#fff"/>
+      <polyline points="396,668 500,568 604,668" fill="none" stroke="#000"
+        stroke-width="66" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <g transform="translate(104.59259259259261 94) scale(0.8148148148148148)" fill="url(#laranja)">
+    <g mask="url(#seta-i)">
+      <path d="M300 470 V330 Q300 190 440 190 H560 Q700 190 700 330 V470"
+        fill="none" stroke="url(#laranja)" stroke-width="88"/>
+      <circle cx="500" cy="600" r="300" clip-path="url(#base-i)"/>
+    </g>
+  </g>
+</svg>

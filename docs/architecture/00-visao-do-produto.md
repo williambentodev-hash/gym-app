@@ -4,7 +4,7 @@
 
 ## 1. Declaração de visão
 
-Para **praticantes autônomos de musculação**, que montam e conduzem o próprio treino, o gym.app é um aplicativo **web e mobile** que permite **planejar fichas, registrar a execução mesmo sem sinal na academia e acompanhar a evolução**. Em versões futuras, o app passa a cobrir também a **dieta**, inclusive com estimativa de calorias a partir de uma foto do prato.
+Para **praticantes autônomos de musculação**, que montam e conduzem o próprio treino, o **Forja** (nome provisório: gym.app) é um aplicativo **web e mobile** que permite **planejar fichas, registrar a execução mesmo sem sinal na academia e acompanhar a evolução**. Em versões futuras, o app passa a cobrir também a **dieta**, inclusive com estimativa de calorias a partir de uma foto do prato.
 
 ## 2. Persona
 

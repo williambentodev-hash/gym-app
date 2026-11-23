@@ -107,7 +107,7 @@ export default function Conta() {
           <Linha titulo="Seus dados" detalhe="Salvos primeiro no aparelho e sincronizados com um armazenamento só seu na nuvem." />
         </Cartao>
       </Secao>
-      <Text style={[tipo.nota, { textAlign: 'center' }]}>gym.app · não substitui orientação profissional de saúde</Text>
+      <Text style={[tipo.nota, { textAlign: 'center' }]}>Forja · não substitui orientação profissional de saúde</Text>
     </Tela>
   );
 }

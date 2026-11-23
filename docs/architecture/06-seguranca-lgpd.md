@@ -22,7 +22,7 @@
 
 Fronteiras de confiança: **aparelho ↔ Worker** (internet) e **Worker ↔ Google** (OAuth). O Worker, o D1 e os DOs estão na mesma conta Cloudflare.
 
-| Ameaça | Exemplo no gym.app | Mitigação | Estado |
+| Ameaça | Exemplo no Forja | Mitigação | Estado |
 |---|---|---|---|
 | **S**poofing (falsificar identidade) | Alguém se passa por outro usuário na API | Sessão Better Auth validada em **toda** rota de dados; o `userId` vem da sessão, **nunca** do cliente | ✅ |
 | **T**ampering (adulterar) | Evento malformado ou gigante corrompe o log | Contratos zod na borda; payload ≤ 16 KB; corpo ≤ 1 MB; eventos inválidos viram no-op no reducer (P8) | ✅ |

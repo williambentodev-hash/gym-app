@@ -12,7 +12,7 @@ async function exigirOk(r: Response): Promise<Response> {
 /** Baixa a exportação completa e entrega ao usuário (compartilhar no celular, download na web). */
 export async function exportarDados(): Promise<void> {
   const texto = await (await exigirOk(await fetchAutenticado('/api/conta/exportar'))).text();
-  const nome = `gym-app-dados-${new Date().toISOString().slice(0, 10)}.json`;
+  const nome = `forja-dados-${new Date().toISOString().slice(0, 10)}.json`;
   if (Platform.OS === 'web') {
     const url = URL.createObjectURL(new Blob([texto], { type: 'application/json' }));
     const a = Object.assign(document.createElement('a'), { href: url, download: nome });
@@ -24,7 +24,7 @@ export async function exportarDados(): Promise<void> {
   if (arquivo.exists) arquivo.delete();
   arquivo.create();
   arquivo.write(texto);
-  await Sharing.shareAsync(arquivo.uri, { mimeType: 'application/json', dialogTitle: 'Seus dados do gym.app' });
+  await Sharing.shareAsync(arquivo.uri, { mimeType: 'application/json', dialogTitle: 'Seus dados do Forja' });
 }
 
 export async function limparEpocaAnterior(): Promise<number> {

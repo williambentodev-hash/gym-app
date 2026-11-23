@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="laranja" gradientUnits="userSpaceOnUse" x1="0" y1="146" x2="0" y2="880">
+      <stop offset="0" stop-color="#FF9A4D"/>
+      <stop offset="0.55" stop-color="#FF7A1A"/>
+      <stop offset="1" stop-color="#E8650A"/>
+    </linearGradient>
+  </defs>
+  <defs>
+    <clipPath id="base-s"><rect x="0" y="0" width="1000" height="880"/></clipPath>
+    <mask id="seta-s" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000">
+      <rect width="1000" height="1000" fill="#fff"/>
+      <polyline points="396,668 500,568 604,668" fill="none" stroke="#000"
+        stroke-width="66" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <g transform="translate(141.62962962962968 132) scale(0.7407407407407407)" fill="url(#laranja)">
+    <g mask="url(#seta-s)">
+      <path d="M300 470 V330 Q300 190 440 190 H560 Q700 190 700 330 V470"
+        fill="none" stroke="url(#laranja)" stroke-width="88"/>
+      <circle cx="500" cy="600" r="300" clip-path="url(#base-s)"/>
+    </g>
+  </g>
+</svg>

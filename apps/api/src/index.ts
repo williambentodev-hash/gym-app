@@ -94,7 +94,7 @@ app.get('/api/conta/exportar', async (c) => {
   const sessoes = await c.env.DB.prepare('SELECT createdAt, expiresAt, userAgent FROM session WHERE userId = ?').bind(userId).all();
   const dados = {
     geradoEm: new Date().toISOString(),
-    descricao: 'Exportação completa dos seus dados no gym.app (LGPD, art. 18, V).',
+    descricao: 'Exportação completa dos seus dados no Forja (LGPD, art. 18, V).',
     usuario,
     contasVinculadas: contas.results,
     sessoes: sessoes.results,
@@ -104,7 +104,7 @@ app.get('/api/conta/exportar', async (c) => {
   return new Response(JSON.stringify(dados, null, 2), {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      'Content-Disposition': `attachment; filename="gym-app-dados-${new Date().toISOString().slice(0, 10)}.json"`,
+      'Content-Disposition': `attachment; filename="forja-dados-${new Date().toISOString().slice(0, 10)}.json"`,
       'Cache-Control': 'no-store',
     },
   });

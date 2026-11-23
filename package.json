@@ -15,11 +15,13 @@
     "docs:arch": "depcruise apps/app/App.tsx apps/api/src packages --config .dependency-cruiser.cjs --output-type mermaid --output-to docs/architecture/dependencias.mmd",
     "deploy": "pnpm --filter @gym/app export:web && pnpm --filter @gym/api deploy",
     "catalogo:gerar": "node scripts/catalogo/gerar.ts",
+    "marca:gerar": "node scripts/marca/gerar-icones.mjs",
     "e2e:web": "pnpm --filter @gym/app export:web && node apps/api/scripts/montar-assets.mjs && node scripts/e2e/rodar.mjs"
   },
   "devDependencies": {
     "dependency-cruiser": "^18.8.0",
     "puppeteer-core": "^25.18.1",
+    "sharp": "0.35.5",
     "turbo": "^2.11.12",
     "typescript": "~6.0.3"
   },

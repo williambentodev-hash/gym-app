@@ -4,7 +4,7 @@ import { Cartao, Tela } from '../ui/componentes';
 import { espaco, tipo } from '../ui/tema';
 
 const SECOES: Array<[string, string]> = [
-  ['Quem somos', 'O gym.app é um aplicativo pessoal, sem fins comerciais, usado pelo seu criador e por familiares convidados.'],
+  ['Quem somos', 'O Forja é um aplicativo pessoal, sem fins comerciais, usado pelo seu criador e por familiares convidados.'],
   ['O que coletamos', 'Da sua conta Google: nome, e-mail e foto (para identificar você). Do uso do app: fichas, treinos, séries, cargas e exercícios personalizados que você registra. Tecnicamente: um identificador aleatório de cada aparelho e dados da sessão de login (data, navegador/aparelho).'],
   ['O que NÃO coletamos', 'Não guardamos os tokens de acesso da sua conta Google (usamos o Google só para entrar), não acessamos contatos, localização, câmera nem microfone, e não há anúncios nem rastreadores.'],
   ['Para que usamos', 'Exclusivamente para o funcionamento do app: guardar seus treinos, sincronizá-los entre seus aparelhos, calcular sugestões de carga e seu progresso e, quando você pedir, gerar uma proposta de ficha com IA. Não vendemos seus dados.'],

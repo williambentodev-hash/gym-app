@@ -20,7 +20,7 @@ O que **não** fazemos, e por quê:
 ```mermaid
 flowchart TB
     U["👤 Praticante autônomo<br/><i>monta fichas, registra treinos,<br/>acompanha a evolução</i>"]
-    S["<b>gym.app</b><br/><i>planejamento, execução offline<br/>e orientação de treino</i>"]
+    S["<b>Forja</b><br/><i>planejamento, execução offline<br/>e orientação de treino</i>"]
     G["Google<br/><i>provedor de identidade (OAuth)</i>"]
 
     U -- "usa (Android / navegador)" --> S

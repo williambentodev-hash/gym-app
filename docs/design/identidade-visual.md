@@ -59,3 +59,12 @@ Transições curtas e com mola suave (~250 ms). Respeitar o "reduzir movimento" 
 ## Implementação
 
 Os tokens viram um módulo de tema único no app (`apps/app/src/ui/tema.ts`), e **nenhuma cor ou tamanho solto** aparece nos componentes. O tema claro fica para depois do MVP: a estrutura de tokens já permite adicioná-lo sem mexer nos componentes.
+
+## Marca
+
+**Nome:** Forja. **Símbolo:** kettlebell laranja com uma seta para cima vazada no corpo (o peso + a progressão de carga). Decisão e trade-offs em [ADR-0017](../adr/0017-nome-e-marca-forja.md).
+
+- Fonte única: `scripts/marca/gerar-icones.mjs`. Para mudar o ícone, edite o desenho e rode `pnpm marca:gerar`; nunca edite os PNGs à mão.
+- O símbolo usa um degradê vertical sutil `#FF9A4D` → `acento` → `acentoPressionado` (metal em brasa). Na interface, o laranja continua **chapado**: o degradê é exclusivo da marca.
+- Sempre sobre grafite (`fundo`), nunca sobre branco. Versão monocromática: silhueta branca, para os ícones temáticos do Android.
+- SVGs de referência em `apps/app/assets/marca/`.
